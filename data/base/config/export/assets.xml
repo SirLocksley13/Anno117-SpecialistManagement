@@ -1,0 +1,2511 @@
+<ModOps>
+  <ModOp Type="add" GUID="2001271" Path="/Values/ShortcutConfig/InputBindings">
+    <Item>
+      <Command>SpecialistFinderRC:Open()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistFinderStatisticsFirstV020</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;I</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;I</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:ForceRescan()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistFinderForceRescanV0145</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;R</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;R</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport1()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport1V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit1</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit1</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport2()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport2V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit2</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit2</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport3()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport3V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit3</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit3</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport4()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport4V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit4</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit4</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport5()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport5V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit5</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit5</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport6()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport6V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit6</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit6</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport7()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport7V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit7</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit7</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport8()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport8V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit8</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit8</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:JumpReport9()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementJumpReport9V057</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit9</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit9</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+  </ModOp>
+  <ModOp Add="/AssetList/Groups[last()]">
+    <Group>
+      <Assets />
+    </Group>
+  </ModOp>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628221</GUID>
+        <Name>SF v014 Best Opportunities Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618231</Text>
+          </Item>
+          <Item>
+            <Text>2008618232</Text>
+          </Item>
+          <Item>
+            <Text>2008618233</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628222</GUID>
+        <Name>SF v014 Unused Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618241</Text>
+          </Item>
+          <Item>
+            <Text>2008618242</Text>
+          </Item>
+          <Item>
+            <Text>2008618243</Text>
+          </Item>
+          <Item>
+            <Text>2008618244</Text>
+          </Item>
+          <Item>
+            <Text>2008618245</Text>
+          </Item>
+          <Item>
+            <Text>2008618246</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628223</GUID>
+        <Name>SF v014 Improve Placements Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618223</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628224</GUID>
+        <Name>SF v014 Purpose Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618261</Text>
+          </Item>
+          <Item>
+            <Text>2008618262</Text>
+          </Item>
+          <Item>
+            <Text>2008618263</Text>
+          </Item>
+          <Item>
+            <Text>2008618264</Text>
+          </Item>
+          <Item>
+            <Text>2008618265</Text>
+          </Item>
+          <Item>
+            <Text>2008618266</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628225</GUID>
+        <Name>SF v014 All Specialists Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618271</Text>
+          </Item>
+          <Item>
+            <Text>2008618272</Text>
+          </Item>
+          <Item>
+            <Text>2008618273</Text>
+          </Item>
+          <Item>
+            <Text>2008618274</Text>
+          </Item>
+          <Item>
+            <Text>2008618275</Text>
+          </Item>
+          <Item>
+            <Text>2008618276</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628201</GUID>
+        <Name>SF v014 Fresh Advisor Storyline</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628202</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628202</GUID>
+        <Name>SF v014 Fresh Advisor Root</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628203</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>100</RequestPriority>
+              <RequestTimeout>600000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>1</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Decision</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628203</GUID>
+        <Name>SF v014 Choose Advisor Function</Name>
+      </Standard>
+      <Decision>
+        <DecisionScreenConfig>
+          <Headline>2008618201</Headline>
+          <Text>2008618202</Text>
+          <LeftParticipant>41</LeftParticipant>
+        </DecisionScreenConfig>
+        <DecisionOptions>
+          <Item>
+            <OptionText>2008618203</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618204</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618205</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618206</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618207</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618208</OptionText>
+          </Item>
+        </DecisionOptions>
+      </Decision>
+      <QuestComponent />
+      <DecisionComponent>
+        <DecisionOutputs>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628320</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628212</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628213</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628214</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628281</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628284</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+        </DecisionOutputs>
+      </DecisionComponent>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628211</GUID>
+        <Name>SF v014 Open Best Opportunities</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628221</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628212</GUID>
+        <Name>SF v014 Open Unused Specialists</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628222</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628213</GUID>
+        <Name>SF v014 Open Improve Placements</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628223</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628214</GUID>
+        <Name>SF v014 Open Find by Purpose</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628224</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628215</GUID>
+        <Name>SF v014 Open All Specialists</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628225</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628284</GUID>
+        <Name>SF v014 Close Specialist Finder</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions />
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Decision</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628281</GUID>
+        <Name>SM v050 More Specialist Tools</Name>
+      </Standard>
+      <Decision>
+        <DecisionScreenConfig>
+          <Headline>2008618450</Headline>
+          <Text>2008618451</Text>
+          <LeftParticipant>41</LeftParticipant>
+        </DecisionScreenConfig>
+        <DecisionOptions>
+          <Item>
+            <OptionText>2008618452</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618453</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618454</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618455</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618456</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618457</OptionText>
+          </Item>
+        </DecisionOptions>
+      </Decision>
+      <QuestComponent />
+      <DecisionComponent>
+        <DecisionOutputs>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628452</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628453</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628454</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628455</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628215</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628203</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+        </DecisionOutputs>
+      </DecisionComponent>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628301</GUID>
+        <Name>SF v01412 Resume Best Storyline</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628302</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628302</GUID>
+        <Name>SF v01412 Resume Best Root</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628303</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>100</RequestPriority>
+              <RequestTimeout>600000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>1</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628303</GUID>
+        <Name>SF v01412 Resume Best</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628211</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628304</GUID>
+        <Name>SF v01412 Resume Unused Storyline</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628305</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628305</GUID>
+        <Name>SF v01412 Resume Unused Root</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628306</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>100</RequestPriority>
+              <RequestTimeout>600000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>1</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628306</GUID>
+        <Name>SF v01412 Resume Unused</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628212</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628307</GUID>
+        <Name>SF v01412 Resume Improve Storyline</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628308</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628308</GUID>
+        <Name>SF v01412 Resume Improve Root</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628309</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>100</RequestPriority>
+              <RequestTimeout>600000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>1</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628309</GUID>
+        <Name>SF v01412 Resume Improve</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628213</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628310</GUID>
+        <Name>SF v01412 Resume Purpose Storyline</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628311</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628311</GUID>
+        <Name>SF v01412 Resume Purpose Root</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628312</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>100</RequestPriority>
+              <RequestTimeout>600000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>1</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628312</GUID>
+        <Name>SF v01412 Resume Purpose</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628214</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628313</GUID>
+        <Name>SF v01412 Resume All Storyline</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628314</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628314</GUID>
+        <Name>SF v01412 Resume All Root</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628315</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>100</RequestPriority>
+              <RequestTimeout>600000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>1</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628315</GUID>
+        <Name>SF v01412 Resume All</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628215</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Decision</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628320</GUID>
+        <Name>SM v041 Best Opportunities Menu</Name>
+      </Standard>
+      <Decision>
+        <DecisionScreenConfig>
+          <Headline>2008618320</Headline>
+          <Text>2008618321</Text>
+          <LeftParticipant>41</LeftParticipant>
+        </DecisionScreenConfig>
+        <DecisionOptions>
+          <Item>
+            <OptionText>2008618322</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618323</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618324</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618325</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618326</OptionText>
+          </Item>
+          <Item>
+            <OptionText>2008618327</OptionText>
+          </Item>
+        </DecisionOptions>
+      </Decision>
+      <QuestComponent />
+      <DecisionComponent>
+        <DecisionOutputs>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628331</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628332</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628333</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628334</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628211</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+          <Item>
+            <SuccessOutput>
+              <Item>
+                <Component>2008628203</Component>
+              </Item>
+            </SuccessOutput>
+          </Item>
+        </DecisionOutputs>
+      </DecisionComponent>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628341</GUID>
+        <Name>SM v041 Best Use Now Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618341</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628342</GUID>
+        <Name>SM v041 Best Spare Copies Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618342</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628343</GUID>
+        <Name>SM v041 Best Strong Unused Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618343</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628344</GUID>
+        <Name>SM v041 Best Needs Review Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618344</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628331</GUID>
+        <Name>SM v041 Open Best Use Now</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628341</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628332</GUID>
+        <Name>SM v041 Open Best Spare Copies</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628342</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628333</GUID>
+        <Name>SM v041 Open Best Strong Unused</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628343</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628334</GUID>
+        <Name>SM v041 Open Best Needs Review</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628344</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628452</GUID>
+        <Name>SM v050 Open Empty Slot Opportunities</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628462</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628453</GUID>
+        <Name>SM v050 Scan Again What Changed</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628463</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628454</GUID>
+        <Name>SM v050 Open Ship Recommendations</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628464</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>Sequence</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628455</GUID>
+        <Name>SM v050 Open Empire Overview</Name>
+      </Standard>
+      <Sequence>
+        <SequenceActions>
+          <Item>
+            <Action>
+              <Template>ActionTriggerTextPopup</Template>
+              <Values>
+                <ActionTriggerTextPopup>
+                  <TextPopup>2008628465</TextPopup>
+                </ActionTriggerTextPopup>
+                <Action />
+              </Values>
+            </Action>
+          </Item>
+        </SequenceActions>
+      </Sequence>
+      <QuestComponentConnector />
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628462</GUID>
+        <Name>SM v050 Empty Slot Marker Paged</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618462</Text>
+          </Item>
+          <Item>
+            <Text>2008618492</Text>
+          </Item>
+          <Item>
+            <Text>2008618493</Text>
+          </Item>
+          <Item>
+            <Text>2008618494</Text>
+          </Item>
+          <Item>
+            <Text>2008618495</Text>
+          </Item>
+          <Item>
+            <Text>2008618496</Text>
+          </Item>
+          <Item>
+            <Text>2008618497</Text>
+          </Item>
+          <Item>
+            <Text>2008618498</Text>
+          </Item>
+          <Item>
+            <Text>2008618499</Text>
+          </Item>
+          <Item>
+            <Text>2008618500</Text>
+          </Item>
+          <Item>
+            <Text>2008618501</Text>
+          </Item>
+          <Item>
+            <Text>2008618502</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628463</GUID>
+        <Name>SM v050 Changes Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618463</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628464</GUID>
+        <Name>SM v050 Ship Recommendations Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618464</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>TextPopup</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628465</GUID>
+        <Name>SM v050 Empire Overview Marker</Name>
+      </Standard>
+      <TextPopup>
+        <Type>ScrollVertical01</Type>
+        <Pages>
+          <Item>
+            <Text>2008618465</Text>
+          </Item>
+        </Pages>
+      </TextPopup>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628480</GUID>
+        <Name>SM v050 Resume Changes Storyline</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628481</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628481</GUID>
+        <Name>SM v050 Resume Changes Root</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628482</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>100</RequestPriority>
+              <RequestTimeout>600000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>1</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628482</GUID>
+        <Name>SM v050 Resume Changes</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628453</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628370</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628370</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628371</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628371</GUID>
+        <Name>SM v047 Fresh Return Root 2008628371</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628372</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628372</GUID>
+        <Name>SM v047 Fresh Return Function 2008628372</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628373</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628373</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628374</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628374</GUID>
+        <Name>SM v047 Fresh Return Root 2008628374</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628375</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628375</GUID>
+        <Name>SM v047 Fresh Return Function 2008628375</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628376</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628376</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628377</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628377</GUID>
+        <Name>SM v047 Fresh Return Root 2008628377</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628378</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628378</GUID>
+        <Name>SM v047 Fresh Return Function 2008628378</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628379</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628379</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628380</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628380</GUID>
+        <Name>SM v047 Fresh Return Root 2008628380</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628381</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628381</GUID>
+        <Name>SM v047 Fresh Return Function 2008628381</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628382</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628382</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628383</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628383</GUID>
+        <Name>SM v047 Fresh Return Root 2008628383</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628384</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628384</GUID>
+        <Name>SM v047 Fresh Return Function 2008628384</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628385</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628385</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628386</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628386</GUID>
+        <Name>SM v047 Fresh Return Root 2008628386</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628387</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628387</GUID>
+        <Name>SM v047 Fresh Return Function 2008628387</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628388</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628388</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628389</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628389</GUID>
+        <Name>SM v047 Fresh Return Root 2008628389</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628390</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628390</GUID>
+        <Name>SM v047 Fresh Return Function 2008628390</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628391</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628391</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628392</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628392</GUID>
+        <Name>SM v047 Fresh Return Root 2008628392</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628393</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628393</GUID>
+        <Name>SM v047 Fresh Return Function 2008628393</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628394</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628394</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628395</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628395</GUID>
+        <Name>SM v047 Fresh Return Root 2008628395</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628396</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628396</GUID>
+        <Name>SM v047 Fresh Return Function 2008628396</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628397</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628397</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628398</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628398</GUID>
+        <Name>SM v047 Fresh Return Root 2008628398</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628399</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628399</GUID>
+        <Name>SM v047 Fresh Return Function 2008628399</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628400</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628400</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628401</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628401</GUID>
+        <Name>SM v047 Fresh Return Root 2008628401</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628402</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628402</GUID>
+        <Name>SM v047 Fresh Return Function 2008628402</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>StoryLine</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628403</GUID>
+        <Name>SM v047 Fresh Return Storyline 2008628403</Name>
+      </Standard>
+      <StoryLine>
+        <System>GovernorDecisions</System>
+        <StartConnector>
+          <Item>
+            <Component>2008628404</Component>
+          </Item>
+        </StartConnector>
+        <MaxStartedByPools>-1</MaxStartedByPools>
+        <IsRepeatable>1</IsRepeatable>
+      </StoryLine>
+      <QuestComponent />
+      <QuestComponentConnector />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>DecisionRoot</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628404</GUID>
+        <Name>SM v047 Fresh Return Root 2008628404</Name>
+      </Standard>
+      <DecisionRoot>
+        <DecisionRootOutput>
+          <Item />
+        </DecisionRootOutput>
+        <DecisionRootStartComponent>2008628405</DecisionRootStartComponent>
+        <DecisionGovernorRequest>
+          <IsBaseAutoCreateAsset>1</IsBaseAutoCreateAsset>
+          <Values>
+            <GovernorRequest>
+              <RequestDescription>2008618200</RequestDescription>
+              <RequestPriority>101</RequestPriority>
+              <RequestTimeout>1000</RequestTimeout>
+              <RequestIcon>130038</RequestIcon>
+              <RequestParticipant>41</RequestParticipant>
+              <IsRequestMandatory>0</IsRequestMandatory>
+            </GovernorRequest>
+          </Values>
+        </DecisionGovernorRequest>
+        <UIType>Popup</UIType>
+      </DecisionRoot>
+      <QuestComponent />
+    </Values>
+  </Asset>
+  <Asset>
+    <Template>FunctionImmediate</Template>
+    <Values>
+      <Standard>
+        <GUID>2008628405</GUID>
+        <Name>SM v047 Fresh Return Function 2008628405</Name>
+      </Standard>
+      <Function>
+        <FunctionSuccessOutput>
+          <Item>
+            <Component>2008628203</Component>
+          </Item>
+        </FunctionSuccessOutput>
+      </Function>
+      <QuestComponent />
+      <PreConditionList>
+        <Condition>
+          <Template>ConditionAlwaysTrue</Template>
+          <Values>
+            <Condition />
+            <ConditionAlwaysTrue />
+          </Values>
+        </Condition>
+      </PreConditionList>
+    </Values>
+  </Asset>
+</ModOps>

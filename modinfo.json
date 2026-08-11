@@ -1,0 +1,27 @@
+{
+  "ModID": "specialist-management-v0546",
+  "Version": "1.0.0",
+  "Anno": 8,
+  "Difficulty": "unchanged",
+  "ModName": "Specialist Management",
+  "Category": {
+    "English": "Mod"
+  },
+  "Description": "Province-aware Specialist Management for Latium and Albion. Ctrl+Alt+I opens management reports or filters an open specialist picker to relevant specialists. Includes best opportunities, unused/equipped reports, empty-slot opportunities, ship recommendations, What Changed, Empire Overview, and direct report jumps. Read-only: never equips or transfers specialists.",
+  "CreatorName": "Dr. Enrico Handrick / SirLocksley13",
+  "Scripts": {
+    "Modules": [
+      "specialistfinder/specialist-finder.lua"
+    ],
+    "Init": "SpecialistFinderRC = require(\"specialist-finder\")",
+    "Load": "SpecialistFinderRC:Load()",
+    "Tick": "SpecialistFinderRC:Tick()"
+  },
+  "Name": "Specialist Management",
+  "GameSetup": {
+    "RequiresNewGame": false,
+    "SafeToRemove": false,
+    "Multiplayer": false,
+    "Campaign": false
+  }
+}
