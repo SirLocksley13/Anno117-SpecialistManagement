@@ -15,20 +15,6 @@
       </InputTypes>
     </Item>
     <Item>
-      <Command>SpecialistFinderRC:ForceRescan()</Command>
-      <Active>Session</Active>
-      <Identifier>SpecialistFinderForceRescanV0145</Identifier>
-      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
-      <InputTypes>
-        <Modern>
-          <KeyType>Control;Alt;R</KeyType>
-        </Modern>
-        <Legacy>
-          <KeyType>Control;Alt;R</KeyType>
-        </Legacy>
-      </InputTypes>
-    </Item>
-    <Item>
       <Command>SpecialistFinderRC:JumpReport1()</Command>
       <Active>Session</Active>
       <Identifier>SpecialistManagementJumpReport1V057</Identifier>
@@ -151,6 +137,20 @@
         </Modern>
         <Legacy>
           <KeyType>Control;Alt;Digit9</KeyType>
+        </Legacy>
+      </InputTypes>
+    </Item>
+    <Item>
+      <Command>SpecialistFinderRC:BackToMenu()</Command>
+      <Active>Session</Active>
+      <Identifier>SpecialistManagementBackToMenuV110Test6</Identifier>
+      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+      <InputTypes>
+        <Modern>
+          <KeyType>Control;Alt;Digit0</KeyType>
+        </Modern>
+        <Legacy>
+          <KeyType>Control;Alt;Digit0</KeyType>
         </Legacy>
       </InputTypes>
     </Item>
