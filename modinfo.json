@@ -1,6 +1,6 @@
 {
   "ModID": "specialist-management-v0546",
-  "Version": "1.0.0",
+  "Version": "1.1.0",
   "Anno": 8,
   "Difficulty": "unchanged",
   "ModName": "Specialist Management",
@@ -23,5 +23,6 @@
     "SafeToRemove": false,
     "Multiplayer": false,
     "Campaign": false
-  }
+  },
+  "version": "1.1.0"
 }
