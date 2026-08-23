@@ -1,0 +1,268 @@
+<ModOps>
+  <ModOp Add="/TextExport/Texts[1]">
+    <Text>
+      <Text>Specialist Management öffnen.</Text>
+      <LineId>2008618200</LineId>
+    </Text>
+    <Text>
+      <Text>Specialist Management</Text>
+      <LineId>2008618201</LineId>
+    </Text>
+    <Text>
+      <Text>Was möchtest du mit deinen Spezialisten machen?</Text>
+      <LineId>2008618202</LineId>
+    </Text>
+    <Text>
+      <Text>Beste Einsatzmöglichkeiten</Text>
+      <LineId>2008618203</LineId>
+    </Text>
+    <Text>
+      <Text>Nicht eingesetzte Spezialisten</Text>
+      <LineId>2008618204</LineId>
+    </Text>
+    <Text>
+      <Text>Eingesetzte Spezialisten optimieren</Text>
+      <LineId>2008618205</LineId>
+    </Text>
+    <Text>
+      <Text>Nach Einsatzbereich suchen</Text>
+      <LineId>2008618206</LineId>
+    </Text>
+    <Text>
+      <Text>Mehr …</Text>
+      <LineId>2008618207</LineId>
+    </Text>
+    <Text>
+      <Text>&lt;&lt;&lt; SPECIALIST MANAGEMENT SCHLIESSEN &gt;&gt;&gt;</Text>
+      <LineId>2008618208</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_IMPROVE</Text>
+      <LineId>2008618223</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_BEST_P1</Text>
+      <LineId>2008618231</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_BEST_P2</Text>
+      <LineId>2008618232</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_BEST_P3</Text>
+      <LineId>2008618233</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_UNUSED_P1</Text>
+      <LineId>2008618241</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_UNUSED_P2</Text>
+      <LineId>2008618242</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_UNUSED_P3</Text>
+      <LineId>2008618243</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_UNUSED_P4</Text>
+      <LineId>2008618244</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_UNUSED_P5</Text>
+      <LineId>2008618245</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_UNUSED_P6</Text>
+      <LineId>2008618246</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_PURPOSE_P1</Text>
+      <LineId>2008618261</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_PURPOSE_P2</Text>
+      <LineId>2008618262</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_PURPOSE_P3</Text>
+      <LineId>2008618263</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_PURPOSE_P4</Text>
+      <LineId>2008618264</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_PURPOSE_P5</Text>
+      <LineId>2008618265</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_PURPOSE_P6</Text>
+      <LineId>2008618266</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_ALL_P1</Text>
+      <LineId>2008618271</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_ALL_P2</Text>
+      <LineId>2008618272</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_ALL_P3</Text>
+      <LineId>2008618273</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_ALL_P4</Text>
+      <LineId>2008618274</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_ALL_P5</Text>
+      <LineId>2008618275</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V014_ALL_P6</Text>
+      <LineId>2008618276</LineId>
+    </Text>
+    <Text>
+      <Text>Beste Einsatzmöglichkeiten</Text>
+      <LineId>2008618320</LineId>
+    </Text>
+    <Text>
+      <Text>Wo bringen dir deine Spezialisten aktuell den größten Nutzen?</Text>
+      <LineId>2008618321</LineId>
+    </Text>
+    <Text>
+      <Text>Jetzt einsetzen</Text>
+      <LineId>2008618322</LineId>
+    </Text>
+    <Text>
+      <Text>Weitere Exemplare einsetzen</Text>
+      <LineId>2008618323</LineId>
+    </Text>
+    <Text>
+      <Text>Starke nicht eingesetzte Spezialisten</Text>
+      <LineId>2008618324</LineId>
+    </Text>
+    <Text>
+      <Text>Noch prüfen</Text>
+      <LineId>2008618325</LineId>
+    </Text>
+    <Text>
+      <Text>Alle Einsatzmöglichkeiten</Text>
+      <LineId>2008618326</LineId>
+    </Text>
+    <Text>
+      <Text>&lt;&lt;&lt; ZURÜCK ZU SPECIALIST MANAGEMENT &gt;&gt;&gt;</Text>
+      <LineId>2008618327</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V041_BEST_USE_NOW</Text>
+      <LineId>2008618341</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V041_BEST_SPARES</Text>
+      <LineId>2008618342</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V041_BEST_STRONG_UNUSED</Text>
+      <LineId>2008618343</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V041_BEST_NEEDS_REVIEW</Text>
+      <LineId>2008618344</LineId>
+    </Text>
+    <Text>
+      <Text>Weitere Spezialistenfunktionen</Text>
+      <LineId>2008618450</LineId>
+    </Text>
+    <Text>
+      <Text>Weitere Berichte und Werkzeuge für deine Spezialisten.</Text>
+      <LineId>2008618451</LineId>
+    </Text>
+    <Text>
+      <Text>Freie Spezialistenplätze</Text>
+      <LineId>2008618452</LineId>
+    </Text>
+    <Text>
+      <Text>Neu scannen / Änderungen anzeigen</Text>
+      <LineId>2008618453</LineId>
+    </Text>
+    <Text>
+      <Text>Empfehlungen für Schiffe</Text>
+      <LineId>2008618454</LineId>
+    </Text>
+    <Text>
+      <Text>Gesamtübersicht</Text>
+      <LineId>2008618455</LineId>
+    </Text>
+    <Text>
+      <Text>Alle Spezialisten</Text>
+      <LineId>2008618456</LineId>
+    </Text>
+    <Text>
+      <Text>&lt;&lt;&lt; ZURÜCK ZU SPECIALIST MANAGEMENT &gt;&gt;&gt;</Text>
+      <LineId>2008618457</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P1</Text>
+      <LineId>2008618462</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_CHANGES</Text>
+      <LineId>2008618463</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_SHIPS</Text>
+      <LineId>2008618464</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPIRE</Text>
+      <LineId>2008618465</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P2</Text>
+      <LineId>2008618492</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P3</Text>
+      <LineId>2008618493</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P4</Text>
+      <LineId>2008618494</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P5</Text>
+      <LineId>2008618495</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P6</Text>
+      <LineId>2008618496</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P7</Text>
+      <LineId>2008618497</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P8</Text>
+      <LineId>2008618498</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P9</Text>
+      <LineId>2008618499</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P10</Text>
+      <LineId>2008618500</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P11</Text>
+      <LineId>2008618501</LineId>
+    </Text>
+    <Text>
+      <Text>SF_V050_EMPTY_SLOTS_P12</Text>
+      <LineId>2008618502</LineId>
+    </Text>
+  </ModOp>
+</ModOps>
