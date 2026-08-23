@@ -1,5 +1,5 @@
 local SpecialistFinder = {}
-local PREFIX = "[Specialist Finder Auto-Close Before Scan 0.14.13] "
+local PREFIX = "[Specialist Management 1.1.0 / Finder 0.14.13 Patch 2] "
 local VERIFIED_PROFILES = {
 [42618] = {
 name = "Collegiate of Aeneas",
@@ -402,6 +402,7 @@ verified = false
 end
 local profile = VERIFIED_PROFILES[guid]
 local known = KNOWN_SPECIALISTS[guid]
+local heroic = SpecialistFinder.HEROIC_SPECIALISTS[guid]
 local asset = safe(function()
 return type(ItemAssetData) == "function"
 and ItemAssetData(guid) or nil
@@ -411,14 +412,16 @@ local text = valueText(value)
 if text == "nil" then return "" end
 return text
 end
-local name = profile and profile.name
-or known and known.name
-or clean(read(asset, "Text"))
+local name = clean(read(asset, "Text"))
+if name == "" then
+name = profile and profile.name or known and known.name or ""
+end
+local rarity = profile and profile.rarity or clean(read(asset, "Rarity"))
+if rarity == "" and heroic then rarity = "Mythic" end
 return {
 guid = guid,
 name = name,
-rarity = profile and profile.rarity
-or clean(read(asset, "Rarity")),
+rarity = rarity,
 niche = profile and profile.niche
 or clean(read(asset, "Niche")),
 targets = profile and profile.targets
@@ -428,7 +431,12 @@ or read(asset, "Target")
 ),
 effects = profile and profile.effects
 or "<numerical profile not yet verified>",
-verified = profile ~= nil
+verified = profile ~= nil,
+heroic = heroic ~= nil,
+neededPrestige = heroic and heroic.neededPrestige or nil,
+mythicEffect = heroic and heroic.mythicEffect or nil,
+localEffectScope = heroic and heroic.localScope or nil,
+islandEffectScope = heroic and heroic.islandScope or nil
 }
 end
 local function currentSession()
@@ -520,7 +528,7 @@ end
 return row.itemType == "1353802289"
 or row.itemType == "1439785852"
 end
-local SpecialistFinder = {
+SpecialistFinder = {
 Cache = {},
 StoredCache = {},
 EmptySlotsCache = {},
@@ -530,6 +538,7 @@ StoredRows = {},
 ChangesReportReadySession = nil,
 PageJumpTargets = {},
 ActiveReportMarker = nil,
+SpecialistReportOpen = false,
 PendingReportJump = nil,
 PendingJumpDelayTicks = 0,
 PendingJumpReady = false,
@@ -570,6 +579,43 @@ originalIDText = "",
 selected = false,
 jumpIssued = false
 }
+}
+-- Patch 2.0 source-derived metadata. These records intentionally preserve the
+-- ordinary, boosted, and island-wide effect layers separately. They do not
+-- claim that the current island has enough Prestige to equip the specialist.
+-- Keep Patch 2 metadata on SpecialistFinder instead of adding another top-level local:
+-- this file is already close to Lua's 200-local limit for a single main chunk.
+SpecialistFinder.HEROIC_SPECIALISTS = {
+[160048] = {neededPrestige=5000,mythicEffect=166439,localScope="Radius",localTargets={50232},localBuffs={160049},boostedBuffs={160050},boostHint="-6900003719951678328",islandScope="ObjectsInArea",islandBuffs={166440},islandTargets={50611}},
+[160051] = {neededPrestige=8000,mythicEffect=166441,localScope="Radius",localTargets={5851},localBuffs={160052},boostedBuffs={160053},boostHint="-6900894828022615308",islandScope="ObjectsInArea",islandBuffs={166442},islandTargets={5851,5604}},
+[160054] = {neededPrestige=7000,mythicEffect=166443,localScope="Radius",localTargets={50601},localBuffs={160055},boostedBuffs={160056},boostHint="-6916871948074345144",islandScope="ObjectsInArea",islandBuffs={166444},islandTargets={2956}},
+[160057] = {neededPrestige=8000,mythicEffect=166445,localScope="Radius",localTargets={5615},localBuffs={160058},boostedBuffs={160059},boostHint="-6916491900076277381",islandScope="ObjectsInArea",islandBuffs={166446},islandTargets={8431,5615}},
+[160060] = {neededPrestige=6000,mythicEffect=166447,localScope="Radius",localTargets={42602},localBuffs={160061},boostedBuffs={160062},boostHint="-6913267656944693226",islandScope="ObjectsInArea",islandBuffs={166448},islandTargets={2698}},
+[160063] = {neededPrestige=5000,mythicEffect=166449,localScope="Radius",localTargets={43099},localBuffs={160064},boostedBuffs={160065},boostHint="-6904130096224905097",islandScope="Area",islandBuffs={166450},islandTargets={}},
+[160066] = {neededPrestige=12000,mythicEffect=166451,localScope="Radius",localTargets={3201},localBuffs={160067},boostedBuffs={160068},boostHint="-6913416529118237283",islandScope="ObjectsInArea",islandBuffs={166452},islandTargets={31046}},
+[160072] = {neededPrestige=15000,mythicEffect=166453,localScope="Radius",localTargets={50293},localBuffs={160073},boostedBuffs={160074},boostHint="-6907024594644404690",islandScope="ObjectsInArea",islandBuffs={166454},islandTargets={31046}},
+[160075] = {neededPrestige=12000,mythicEffect=166455,localScope="Radius",localTargets={50614},localBuffs={160076},boostedBuffs={160077},boostHint="-6903614035456919964",islandScope="ObjectsInArea",islandBuffs={166456},islandTargets={32363,62768,68361,82157}},
+[160078] = {neededPrestige=20000,mythicEffect=166457,localScope="Radius",localTargets={3192},localBuffs={160079},boostedBuffs={160080},boostHint="-6902610383023918898",islandScope="ObjectsInArea",islandBuffs={166458},islandTargets={31046}},
+[160081] = {neededPrestige=13000,mythicEffect=166459,localScope="Radius",localTargets={144814},localBuffs={160082},boostedBuffs={160083},boostHint="-6911364313550469831",islandScope="ObjectsInArea",islandBuffs={166460},islandTargets={50237}},
+[160084] = {neededPrestige=8000,mythicEffect=166461,localScope="Radius",localTargets={31046},localBuffs={160085},boostedBuffs={160086},boostHint="-6909109873503636478",islandScope="Area",islandBuffs={166462},islandTargets={}},
+[160087] = {neededPrestige=9000,mythicEffect=166463,localScope="Radius",localTargets={42605},localBuffs={160088},boostedBuffs={160089},boostHint="-6900642982008789788",islandScope="ObjectsInArea",islandBuffs={166464},islandTargets={42605,31368}},
+[160090] = {neededPrestige=20000,mythicEffect=166465,localScope="Radius",localTargets={70714},localBuffs={160091},boostedBuffs={160092},boostHint="-6916744027386232443",islandScope="ObjectsInArea",islandBuffs={166466},islandTargets={19753}},
+[160093] = {neededPrestige=13000,mythicEffect=166467,localScope="Radius",localTargets={3081},localBuffs={160094},boostedBuffs={160095},boostHint="-6906064650416117433",islandScope="ObjectsInArea",islandBuffs={166468},islandTargets={31046}},
+[160488] = {neededPrestige=20000,mythicEffect=166415,localScope="Radius",localTargets={29318,140478},localBuffs={160489},boostedBuffs={160490},boostHint="-6903185311446801228",islandScope="ObjectsInArea",islandBuffs={166416},islandTargets={29318,140478}},
+[160491] = {neededPrestige=12000,mythicEffect=166471,localScope="Radius",localTargets={43102},localBuffs={160492},boostedBuffs={160493},boostHint="-6915435008509207004",islandScope="ObjectsInArea",islandBuffs={166472},islandTargets={71277}},
+[160494] = {neededPrestige=12000,mythicEffect=166473,localScope="Radius",localTargets={38552},localBuffs={160495},boostedBuffs={160496},boostHint="-6912546452494715092",islandScope="Area",islandBuffs={166474},islandTargets={}},
+[160497] = {neededPrestige=11000,mythicEffect=166475,localScope="ObjectsInArea",localTargets={55981},localBuffs={160498},boostedBuffs={160499},boostHint="-6911148774614445236",islandScope="ObjectsInArea",islandBuffs={166476},islandTargets={6472}},
+[160500] = {neededPrestige=14000,mythicEffect=166477,localScope="Radius",localTargets={3202},localBuffs={160501},boostedBuffs={160504},boostHint="-6905054141619008296",islandScope="ObjectsInArea",islandBuffs={166478},islandTargets={3074}},
+[160507] = {neededPrestige=12000,mythicEffect=166479,localScope="Radius",localTargets={6728},localBuffs={160508},boostedBuffs={160509},boostHint="-6908222505134801959",islandScope="ObjectsInArea",islandBuffs={166480},islandTargets={6514}},
+[160510] = {neededPrestige=17000,mythicEffect=166481,localScope="Radius",localTargets={31659},localBuffs={160511},boostedBuffs={160512},boostHint="-6907201180893224709",islandScope="ObjectsInArea",islandBuffs={166482},islandTargets={3075}},
+[160513] = {neededPrestige=16000,mythicEffect=166483,localScope="Radius",localTargets={3191},localBuffs={160514},boostedBuffs={160515},boostHint="-6914835771897207837",islandScope="ObjectsInArea",islandBuffs={166484},islandTargets={50611}},
+[160516] = {neededPrestige=18000,mythicEffect=166485,localScope="Radius",localTargets={81446},localBuffs={160517},boostedBuffs={160518},boostHint="-6907341164103018756",islandScope="ObjectsInArea",islandBuffs={166486},islandTargets={3145}},
+[160519] = {neededPrestige=20000,mythicEffect=166487,localScope="Radius",localTargets={3528},localBuffs={160520},boostedBuffs={160521},boostHint="-6914530388070632431",islandScope="ObjectsInArea",islandBuffs={166488},islandTargets={3141}},
+[160522] = {neededPrestige=22000,mythicEffect=166489,localScope="Radius",localTargets={50235},localBuffs={160523},boostedBuffs={160524},boostHint="-6910078092724749761",islandScope="ObjectsInArea",islandBuffs={166490},islandTargets={31046}},
+[160525] = {neededPrestige=35000,mythicEffect=166491,localScope="Radius",localTargets={81911},localBuffs={160526},boostedBuffs={160527},boostHint="-6917077851773310314",islandScope="ObjectsInArea",islandBuffs={166492},islandTargets={81911,3621,152714}},
+[160528] = {neededPrestige=40000,mythicEffect=166493,localScope="Radius",localTargets={50605,50608},localBuffs={160529},boostedBuffs={160530},boostHint="-6917122366769608880",islandScope="Area",islandBuffs={166494},islandTargets={}},
+[160531] = {neededPrestige=45000,mythicEffect=166495,localScope="Radius",localTargets={145229,145230},localBuffs={160532},boostedBuffs={160533},boostHint="-6900173594383635492",islandScope="ObjectsInArea",islandBuffs={166496},islandTargets={3141}},
+[160534] = {neededPrestige=40000,mythicEffect=166497,localScope="Radius",localTargets={3528},localBuffs={160535},boostedBuffs={160536},boostHint="-6915243636848976715",islandScope="ObjectsInArea",islandBuffs={166498},islandTargets={3142,3145}}
 }
 local function cacheSessionInventory(sessionGUID, rows)
 local unique = {}
@@ -2157,7 +2203,7 @@ end
 end
 end
 function SpecialistFinder:Load()
-log("Load completed | Ctrl+Alt+I scans automatically and opens the stable six-choice menu | v0.14.13: when a report is requested without current scan data, shows a short scan message, automatically closes the parchment before warehouse navigation begins, then safely scans and resumes the requested report; single return icon protection and labeled reports retained; persistent Close retained; Ctrl+Alt+R force rescan | scanner and inventory logic unchanged | readOnlyInventory=true")
+log("Load completed | Specialist Management 1.1.0 Patch 2 | Ctrl+Alt+I scans automatically and opens the stable six-choice menu | New Scan remains available in the menu | Heroic internal rarity=Mythic | heroicMetadataCount="..tostring(countTable(SpecialistFinder.HEROIC_SPECIALISTS)).." | scanner and inventory logic unchanged | readOnlyInventory=true")
 end
 function SpecialistFinder:RunGeneral()
 self.StoredRows = {}
@@ -2250,7 +2296,7 @@ if s == "nil" then return "" end
 return s
 end
 local function rarityRank(r)
-local ranks = {Legendary=5, Epic=4, Rare=3, Uncommon=2, Common=1}
+local ranks = {Mythic=6, Legendary=5, Epic=4, Rare=3, Uncommon=2, Common=1}
 return ranks[cleanText(r)] or 0
 end
 local function trimText(value)
@@ -2890,55 +2936,41 @@ self.SearchInputMethodWatch=nil
 end
 return false
 end
-local storage,outer,inner=self:WarehouseSearchInput()
-if not inner then return false end
-w.beforeGridSize=gridSize
-local before=tostring(read(inner,"Text") or "")
-local writeOk,writeErr=pcall(function() inner.Text=tostring(w.label or "") end)
-local after=tostring(read(inner,"Text") or "")
-local methodAvailable=false
-local callOk=false
-local callErr=""
-local okGet,method=pcall(function() return inner.TextFinished end)
-if okGet and type(method)=="function" then
-methodAvailable=true
-local ok,res=pcall(function() return inner:TextFinished() end)
-callOk=ok
-if not ok then callErr=tostring(res) end
-end
-log("WAREHOUSE SPECIALIST SEARCH COMMIT"
-.." | label="..tostring(w.label)
-.." | targetGuid="..tostring(w.targetGuid)
-.." | destinationRowIndex="..tostring(rowIndex)
-.." | beforeGridSize="..tostring(gridSize)
-.." | beforeText="..tostring(before)
-.." | afterText="..tostring(after)
-.." | writeSuccess="..tostring(writeOk)
-.." | writeError="..tostring(writeErr or "")
-.." | methodAvailable="..tostring(methodAvailable)
-.." | TextFinishedSuccess="..tostring(callOk)
-.." | TextFinishedError="..tostring(callErr)
-.." | inventoryMutation=false")
-if not (writeOk and methodAvailable and callOk) then
--- Safe fallback: focus the target in the unfiltered list rather than retrying unsafe UI events.
+-- v1.0.3: The destination warehouse already exposes the exact specialist GUID
+-- in its unfiltered ItemsGrid. Focus that row directly instead of typing the
+-- localized specialist name into Anno's text search. This avoids search-name
+-- mismatches (observed with Inflammatory Flamincia) and is language-neutral.
 local interaction=read(button,"Interaction")
+local beforeFocused=interaction and read(interaction,"IsFocused") or nil
+local focusAvailable=false
 local focusOk=false
+local focusErr=""
 if interaction then
-local okGetFocus,methodFocus=pcall(function() return interaction.RequestFocus end)
-if okGetFocus and type(methodFocus)=="function" then
-focusOk=pcall(function() interaction:RequestFocus() end)
+local okGet,method=pcall(function() return interaction.RequestFocus end)
+if okGet and type(method)=="function" then
+focusAvailable=true
+local ok,res=pcall(function() return interaction:RequestFocus() end)
+focusOk=ok
+if not ok then focusErr=tostring(res) end
 end
 end
-log("WAREHOUSE SPECIALIST LOCATE FALLBACK"
+local afterFocused=interaction and read(interaction,"IsFocused") or nil
+local _,_,inner=self:WarehouseSearchInput()
+local currentText=tostring(inner and read(inner,"Text") or "")
+log("WAREHOUSE SPECIALIST GUID LOCATE SUCCESS"
 .." | label="..tostring(w.label)
 .." | targetGuid="..tostring(w.targetGuid)
+.." | unfilteredGridSize="..tostring(gridSize)
+.." | targetRowIndex="..tostring(rowIndex)
+.." | searchText="..tostring(currentText)
+.." | RequestFocusAvailable="..tostring(focusAvailable)
 .." | RequestFocusSuccess="..tostring(focusOk)
+.." | beforeFocused="..tostring(beforeFocused)
+.." | afterFocused="..tostring(afterFocused)
+.." | focusError="..tostring(focusErr)
+.." | method=GUID-row-direct-no-text-search"
 .." | inventoryMutation=false")
 self.SearchInputMethodWatch=nil
-return true
-end
-w.stage="wait-filtered-grid"
-w.delayTicks=1
 return true
 end
 
@@ -3009,7 +3041,7 @@ log("REPORT SHORTCUT JUMP IGNORED | slot="..tostring(slot).." | reason=target is
 return false
 end
 self.PendingReportJump={slot=slot,target=target,marker=self.ActiveReportMarker}
-if target.direct==true or target.kind=="empty-slot" or target.kind=="placement-host" then
+if true then -- Test6: all report shortcuts jump directly; no hidden return helper
 local isWarehouse=target.kind=="warehouse"
 if isWarehouse then self:ClearWarehouseSearch("before direct report warehouse jump") end
 log("DIRECT REPORT JUMP REQUESTED | slot="..tostring(slot)
@@ -3017,7 +3049,7 @@ log("DIRECT REPORT JUMP REQUESTED | slot="..tostring(slot)
 .." | label="..tostring(target.label or "")
 .." | kind="..tostring(target.kind or "")
 .." | objectID="..tostring(target.objectID or "")
-.." | behavior=close parchment and jump directly; no return helper")
+.." | behavior=close parchment and jump directly; universal no-return-helper mode")
 local closeOk,closeErr=pcall(function()
 if Scripts and type(Scripts.PopUI)=="function" then Scripts:PopUI() end
 end)
@@ -3060,7 +3092,7 @@ log("DIRECT WAREHOUSE SPECIALIST LOCATE ARMED"
 .." | label="..tostring(target.label or "")
 .." | targetGuid="..tostring(target.guid or "")
 .." | delayTicks=1"
-.." | then=Text write + TextFinished + RequestFocus"
+.." | then=GUID row direct RequestFocus; no text search"
 .." | inventoryMutation=false")
 end
 log("DIRECT REPORT JUMP EXECUTED | slot="..tostring(slot)
@@ -3105,6 +3137,39 @@ function SpecialistFinder:JumpReport6() return self:JumpReportItem(6) end
 function SpecialistFinder:JumpReport7() return self:JumpReportItem(7) end
 function SpecialistFinder:JumpReport8() return self:JumpReportItem(8) end
 function SpecialistFinder:JumpReport9() return self:JumpReportItem(9) end
+function SpecialistFinder:BackToMenu()
+if self.SpecialistReportOpen~=true then
+log("CTRL ALT 0 IGNORED | reason=no active Specialist Management parchment | sharedShortcutSafe=true")
+return false
+end
+local reportScene=ui and ui.Scenes and ui.Scenes.TextPopup or nil
+local reportData=reportScene and read(reportScene,"SceneData") or nil
+local reportContent=reportData and read(reportData,"Content") or nil
+if reportContent==nil then
+self.SpecialistReportOpen=false
+log("CTRL ALT 0 IGNORED | reason=Specialist report flag stale but TextPopup closed | sharedShortcutSafe=true")
+return false
+end
+local closeOk,closeErr=pcall(function()
+if Scripts and type(Scripts.PopUI)=="function" then Scripts:PopUI() end
+end)
+-- Test7: universal Ship Finder / Rename Manager pattern. Every Specialist Management
+-- parchment closes first and then reopens the cached main menu after two UI ticks.
+-- No GovernorDecision return helper is created or consumed.
+self.ReturnRequestProbeTicks=0
+self.ReturnRequestArmed=false
+self.ActiveReturnStorylineGUID=nil
+self.ReportMenuReopenedForCycle=false
+self.MenuSessionActive=true
+self.MenuReturnPendingTicks=2
+log("CTRL ALT 0 | action=universal-close-then-return-main-menu"
+.." | marker="..tostring(self.ActiveReportMarker or "")
+.." | closeSuccess="..tostring(closeOk)
+.." | hiddenReturnHelper=false"
+.." | reopenTicks=2"
+.." | error="..tostring(closeErr or ""))
+return closeOk
+end
 local bestUseText
 local function reportStats(list)
 local stored,equipped,total=0,0,0
@@ -3115,25 +3180,237 @@ total=total+(a.total or 0)
 end
 return stored,equipped,total
 end
+
+function SpecialistFinder.SMLang()
+local ok,asset=pcall(function()
+if type(ItemAssetData)~="function" then return nil end
+return ItemAssetData(51599)
+end)
+if ok and asset then
+local ok2,txt=pcall(function() return asset.Text end)
+if ok2 then
+txt=tostring(txt or "")
+if txt=="Glaspoet" then return "de" end
+if txt=="Glasspoet" then return "en" end
+end
+end
+return "en"
+end
+
+function SpecialistFinder.SMT(en,de)
+if SpecialistFinder.SMLang()=="de" then return de end
+return en
+end
+
+function SpecialistFinder.SMRarity(v)
+v=tostring(v or "")
+local u=string.upper(v)
+if u=="MYTHIC" then
+return SpecialistFinder.SMLang()=="de" and "Heroisch" or "Heroic"
+end
+if SpecialistFinder.SMLang()~="de" then return v end
+if u=="COMMON" then return "Gewöhnlich" end
+if u=="UNCOMMON" then return "Ungewöhnlich" end
+if u=="RARE" then return "Selten" end
+if u=="EPIC" then return "Episch" end
+if u=="LEGENDARY" then return "Legendär" end
+if u=="UNIQUE" then return "Einzigartig" end
+if u=="RARITY ?" then return "Seltenheit ?" end
+return v
+end
+
+function SpecialistFinder.SMTarget(v)
+v=tostring(v or "")
+if SpecialistFinder.SMLang()~="de" then return v end
+if v=="Ships" then return "Schiffe" end
+if v=="Residences" then return "Wohnhäuser" end
+if v=="Towers" then return "Türme" end
+if v=="Arable Farms" then return "Ackerbaubetriebe" end
+if v=="Kitchens" then return "Küchen" end
+if v=="Marble Quarry" then return "Marmorsteinbruch" end
+if v=="Cloaks Chain" then return "Umhangproduktion" end
+if v=="Sailmaker, and Sails Chain" then return "Segelproduktion" end
+if v=="Stringer" then return "Saitenmacher" end
+if v=="Victuallers" then return "Viktualienhändler" end
+if v=="Pileus Felter" then return "Pileus-Filzer" end
+if v=="Libertus Residence" then return "Libertus-Wohnhaus" end
+if v=="Trading Posts, Warehouses, and Depot" then return "Kontore, Lagerhäuser und Depots" end
+if v=="Medici" then return "Medici" end
+if v=="Seafaring" then return "Seefahrt" end
+if v=="Military" then return "Militär" end
+if v=="Economy" then return "Wirtschaft" end
+if v=="Nature" then return "Natur" end
+if v=="Research" then return "Forschung" end
+if v=="Civic" then return "Zivilgesellschaft" end
+if v=="Religion" then return "Religion" end
+if v=="Finance" then return "Finanzen" end
+if v=="Culture" then return "Kultur" end
+if v=="Target not yet identified" then return "Einsatzbereich noch nicht bestimmt" end
+return v
+end
+
+function SpecialistFinder.SMEffects(v)
+v=tostring(v or "")
+if SpecialistFinder.SMLang()~="de" then return v end
+-- Full effect names first.
+v=v:gsub("Knowledge from Bird Tongues in Aspic, if supplied","Wissen durch Vogelzungen in Aspik bei Versorgung")
+v=v:gsub("Knowledge from Pileus, if supplied","Wissen durch Pileus bei Versorgung")
+v=v:gsub("Ship Scorpion Attack range","Schiffsscorpio-Angriffsreichweite")
+v=v:gsub("Ship Scorpion Attack speed","Schiffsscorpio-Angriffsgeschwindigkeit")
+v=v:gsub("Province Transfer Speed","Reisegeschwindigkeit zwischen Provinzen")
+v=v:gsub("Goods Transfer Speed","Warentransfergeschwindigkeit")
+v=v:gsub("Discovery Radius","Entdeckungsradius")
+v=v:gsub("Workforce from residents","Arbeitskraft durch Einwohner")
+v=v:gsub("Workforce Needed","Arbeitskräfte benötigt")
+v=v:gsub("Unfavourable Wind Impact","„Schlechter Wind“-Einfluss")
+v=v:gsub("Favourable Wind Angle","Günstige Windausrichtung")
+v=v:gsub("Knowledge Area Effect","Wissen Bereichseffekt")
+v=v:gsub("Prestige Area Effect","Ansehen Bereichseffekt")
+v=v:gsub("Health Area Effect","Gesundheit Bereichseffekt")
+v=v:gsub("Military Captain","Militär Kapitän")
+v=v:gsub("Seafaring Captain","Seefahrt Kapitän")
+v=v:gsub("Movement Speed","Fahrtgeschwindigkeit")
+v=v:gsub("Self%-repair speed","Selbstreparatur-Geschwindigkeit")
+v=v:gsub("Upkeep Cost","Instandhaltungskosten")
+v=v:gsub("Productivity","Produktivität")
+v=v:gsub("Fire Safety","Brandsicherheit")
+v=v:gsub("Hitpoints","Trefferpunkte")
+-- Short forms created by EFFECT_SHORTEN.
+v=v:gsub("Bird Tongues knowledge","Wissen durch Vogelzungen in Aspik")
+v=v:gsub("Pileus knowledge","Wissen durch Pileus")
+v=v:gsub("Scorpion range","Schiffsscorpio-Angriffsreichweite")
+v=v:gsub("Scorpion speed","Schiffsscorpio-Angriffsgeschwindigkeit")
+v=v:gsub("Goods transfer","Warentransfer")
+v=v:gsub("Province transfer","Reise zwischen Provinzen")
+v=v:gsub("Discovery","Entdeckungsradius")
+v=v:gsub("Resident workforce","Arbeitskraft durch Einwohner")
+v=v:gsub("Workforce needed","Arbeitskräfte benötigt")
+v=v:gsub("Upkeep","Instandhaltungskosten")
+v=v:gsub("Bad%-wind impact","„Schlechter Wind“-Einfluss")
+v=v:gsub("Favourable wind","Günstige Windausrichtung")
+v=v:gsub("Movement","Fahrtgeschwindigkeit")
+v=v:gsub("Self%-repair","Selbstreparatur")
+v=v:gsub("Prestige area","Ansehen Bereichseffekt")
+v=v:gsub("Knowledge area","Wissen Bereichseffekt")
+v=v:gsub("Health area","Gesundheit Bereichseffekt")
+-- Generic values last.
+v=v:gsub("Happiness","Zufriedenheit")
+v=v:gsub("Belief","Glauben")
+v=v:gsub("Income","Einkommen")
+v=v:gsub("Health","Gesundheit")
+v=v:gsub("Knowledge","Wissen")
+v=v:gsub("Prestige","Ansehen")
+return v
+end
+
+function SpecialistFinder.SMCategory(v)
+v=tostring(v or "")
+if SpecialistFinder.SMLang()~="de" then return v end
+if v=="SHIPS" then return "SCHIFFE" end
+if v=="PRODUCTION" then return "PRODUKTION" end
+if v=="WORKFORCE" then return "ARBEITSKRÄFTE" end
+if v=="RESIDENTS" then return "BEWOHNER" end
+if v=="CIVIC" then return "ZIVILGESELLSCHAFT" end
+if v=="MILITARY" then return "MILITÄR" end
+if v=="GENERAL" then return "ALLGEMEIN" end
+if v=="ECONOMY" then return "WIRTSCHAFT" end
+if v=="NATURE" then return "NATUR" end
+if v=="RELIGION" then return "RELIGION" end
+if v=="RESEARCH" then return "FORSCHUNG" end
+if v=="CULTURE" then return "KULTUR" end
+if v=="FINANCE" then return "FINANZEN" end
+return v
+end
+
+function SpecialistFinder.SMConfidence(v)
+v=tostring(v or "")
+if SpecialistFinder.SMLang()~="de" then return v end
+if v=="VERY HIGH" then return "SEHR HOCH" end
+if v=="HIGH" then return "HOCH" end
+if v=="MEDIUM" then return "MITTEL" end
+if v=="LOW" then return "NIEDRIG" end
+if v=="SPECIALIZED" then return "SPEZIALISIERT" end
+if v=="UNVERIFIED" then return "UNGEPRÜFT" end
+return v
+end
+
+function SpecialistFinder.SMDisplayName(guid,fallback)
+fallback=tostring(fallback or "")
+guid=tonumber(guid) or 0
+if guid>0 and type(ItemAssetData)=="function" then
+local ok,asset=pcall(ItemAssetData,guid)
+if ok and asset then
+local ok2,txt=pcall(function() return asset.Text end)
+if ok2 then
+txt=tostring(txt or "")
+if txt~="" then return txt end
+end
+end
+end
+return fallback
+end
+
+function SpecialistFinder.SMLocation(v)
+v=tostring(v or "")
+if SpecialistFinder.SMLang()~="de" then return v end
+v=v:gsub("Governor's Villa","Statthaltervilla")
+v=v:gsub("Guest House","Gästehaus")
+v=v:gsub("Trading Post","Kontor")
+v=v:gsub("Warehouse","Lagerhaus")
+v=v:gsub("Ship","Schiff")
+v=v:gsub("slot ","Platz ")
+return v
+end
+
+function SpecialistFinder.SMPurpose(v)
+v=tostring(v or "")
+if SpecialistFinder.SMLang()~="de" then return v end
+if v=="PRODUCTION & OUTPUT" then return "PRODUKTION & ERTRAG" end
+if v=="WORKFORCE & UPKEEP" then return "ARBEITSKRÄFTE & KOSTEN" end
+if v=="RESIDENTS & INCOME" then return "BEWOHNER & EINKOMMEN" end
+if v=="CIVIC NEEDS & KNOWLEDGE" then return "ZIVILGESELLSCHAFT & WISSEN" end
+if v=="SHIPS & TRADE" then return "SCHIFFE & HANDEL" end
+if v=="MILITARY & DEFENSE" then return "MILITÄR & VERTEIDIGUNG" end
+return v
+end
+
+function SpecialistFinder.SMShipRole(v)
+v=tostring(v or "")
+if SpecialistFinder.SMLang()~="de" then return v end
+if v=="TRADE & LOGISTICS" then return "HANDEL & LOGISTIK" end
+if v=="MILITARY" then return "MILITÄR" end
+if v=="SAILING & EXPLORATION" then return "SEEFAHRT & ERKUNDUNG" end
+if v=="GENERAL SHIP" then return "ALLGEMEINE SCHIFFSSPEZIALISTEN" end
+return v
+end
+
+
 local function reportHeader(title,list,page,pageCount,extra)
 local stored,equipped,total=reportStats(list)
 local lines={}
 lines[#lines+1]=title
+if SpecialistFinder.SMLang()=="de" then
+lines[#lines+1]=string.upper(provinceLabel(currentSession()))
+.." • "..tostring(#(list or {})).." TYPEN"
+.." • "..tostring(stored).." VERFÜGBAR"
+.." • "..tostring(equipped).." EINGESETZT"
+else
 lines[#lines+1]=string.upper(provinceLabel(currentSession()))
 .." • "..tostring(#(list or {})).." TYPES"
 .." • "..tostring(stored).." AVAILABLE"
 .." • "..tostring(equipped).." EQUIPPED"
-if pageCount and pageCount>1 then
-lines[#lines+1]="PAGE "..tostring(page or 1).." OF "..tostring(pageCount)
 end
-if extra and extra~="" then lines[#lines+1]=string.upper(extra) end
+if pageCount and pageCount>1 then
+lines[#lines+1]=SpecialistFinder.SMT("PAGE ","SEITE ")..tostring(page or 1)..SpecialistFinder.SMT(" OF "," VON ")..tostring(pageCount)
+end
+if extra and extra~="" then lines[#lines+1]=(SpecialistFinder.SMLang()=="de" and extra or string.upper(extra)) end
 lines[#lines+1]="----------------------------------------"
 lines[#lines+1]=""
 return table.concat(lines,"\n")
 end
 local function rarityText(a)
 local r=trimText(a and a.rarity or "")
-if r=="" then return "RARITY ?" end
+if r=="" then return SpecialistFinder.SMT("RARITY ?","Seltenheit ?") end
 return string.upper(r)
 end
 local function compactStoredLocationText(a,maxCount)
@@ -3149,8 +3426,8 @@ elseif raw~="" then
 parts[#parts+1]=raw
 end
 end
-if #locations>limit then parts[#parts+1]="+"..tostring(#locations-limit).." locations" end
-return table.concat(parts," • ")
+if #locations>limit then parts[#parts+1]=SpecialistFinder.SMT("+"..tostring(#locations-limit).." locations","+"..tostring(#locations-limit).." weitere Standorte") end
+return SpecialistFinder.SMLocation(table.concat(parts," • "))
 end
 local function compactEquippedLocationText(a,maxCount)
 local parts={}
@@ -3162,8 +3439,8 @@ raw=string.gsub(raw,"Governor's Villa","Villa")
 raw=string.gsub(raw," — "," / ")
 parts[#parts+1]=raw
 end
-if #locations>limit then parts[#parts+1]="+"..tostring(#locations-limit).." placements" end
-return table.concat(parts," • ")
+if #locations>limit then parts[#parts+1]=SpecialistFinder.SMT("+"..tostring(#locations-limit).." placements","+"..tostring(#locations-limit).." Einsatzorte") end
+return SpecialistFinder.SMLocation(table.concat(parts," • "))
 end
 local EFFECT_SHORTEN = {
 {"Knowledge from Bird Tongues in Aspic, if supplied","Bird Tongues knowledge"},
@@ -3229,62 +3506,85 @@ if #parts>0 and #lines==0 then lines[1]=parts[1] end
 return lines
 end
 local function shortRecommendation(a)
+if SpecialistFinder.HEROIC_SPECIALISTS[tonumber(a and a.guid) or 0] and not (a and a.verified) then
+return SpecialistFinder.SMT(
+">>> REVIEW: EFFECTS AND PRESTIGE ELIGIBILITY UNVERIFIED <<<",
+">>> PRÜFEN: EFFEKTE UND ANSEHENSVORAUSSETZUNG NICHT VERIFIZIERT <<<"
+)
+end
 local e=trimText(a.effects)
 local target=bestUseText(a)
 if string.find(e,"Ship Scorpion Attack",1,true) or string.find(e,"Military Captain",1,true) then
-return ">>> USE: MILITARY SHIP <<<"
+return SpecialistFinder.SMT(">>> USE: MILITARY SHIP <<<",">>> EMPFEHLUNG: MILITÄRSCHIFF <<<")
 end
 if string.find(e,"Goods Transfer Speed",1,true) or string.find(e,"Province Transfer Speed",1,true) then
-return ">>> USE: BUSY TRADE / TRANSFER SHIP <<<"
+return SpecialistFinder.SMT(">>> USE: BUSY TRADE / TRANSFER SHIP <<<",">>> EMPFEHLUNG: HANDELS-/TRANSFERSCHIFF <<<")
 end
 if string.find(e,"Wind",1,true) or (target=="Ships" and string.find(e,"Movement Speed",1,true)) then
-return ">>> USE: SAILING OR TRADE SHIP <<<"
+return SpecialistFinder.SMT(">>> USE: SAILING OR TRADE SHIP <<<",">>> EMPFEHLUNG: SEGEL-/HANDELSSCHIFF <<<")
 end
-if string.find(e,"Productivity",1,true) then return ">>> USE: "..string.upper(target).." PRODUCTION <<<" end
-if string.find(e,"Workforce Needed",1,true) or string.find(e,"Upkeep Cost",1,true) then return ">>> USE: DENSE "..string.upper(target).." CLUSTER <<<" end
-if string.find(e,"Workforce from residents",1,true) then return ">>> USE: DENSE "..string.upper(target).." RESIDENTIAL AREA <<<" end
+if string.find(e,"Productivity",1,true) then return SpecialistFinder.SMT(">>> USE: "..string.upper(target).." PRODUCTION <<<",">>> EMPFEHLUNG: "..string.upper(SpecialistFinder.SMTarget(target)).." <<<") end
+if string.find(e,"Workforce Needed",1,true) or string.find(e,"Upkeep Cost",1,true) then return SpecialistFinder.SMT(">>> USE: DENSE "..string.upper(target).." CLUSTER <<<",">>> EMPFEHLUNG: DICHTE "..string.upper(SpecialistFinder.SMTarget(target)).."-GRUPPE <<<") end
+if string.find(e,"Workforce from residents",1,true) then return SpecialistFinder.SMT(">>> USE: DENSE "..string.upper(target).." RESIDENTIAL AREA <<<",">>> EMPFEHLUNG: DICHTES "..string.upper(SpecialistFinder.SMTarget(target)).."-WOHNGEBIET <<<") end
 if string.find(e,"Prestige",1,true) or string.find(e,"Happiness",1,true) or string.find(e,"Health",1,true)
 or string.find(e,"Belief",1,true) or string.find(e,"Knowledge",1,true) or string.find(e,"Fire Safety",1,true) then
-return ">>> USE: LARGE AFFECTED RESIDENTIAL / CIVIC AREA <<<"
+return SpecialistFinder.SMT(">>> USE: LARGE AFFECTED RESIDENTIAL / CIVIC AREA <<<",">>> EMPFEHLUNG: GROSSER BETROFFENER WOHN-/STADTBEREICH <<<")
 end
-if string.find(e,"Hitpoints",1,true) or string.find(e,"Self-repair",1,true) then return ">>> USE: DEFEND "..string.upper(target).." <<<" end
-return ">>> USE: "..string.upper(target).." <<<"
+if string.find(e,"Hitpoints",1,true) or string.find(e,"Self-repair",1,true) then return SpecialistFinder.SMT(">>> USE: DEFEND "..string.upper(target).." <<<",">>> EMPFEHLUNG: "..string.upper(SpecialistFinder.SMTarget(target)).." VERTEIDIGEN <<<") end
+return SpecialistFinder.SMT(">>> USE: "..string.upper(target).." <<<",">>> EMPFEHLUNG: "..string.upper(SpecialistFinder.SMTarget(target)).." <<<")
 end
 local function actionFirstStoredLocation(a)
 local locations=(a and a.storedLocations) or {}
-if #locations==0 then return "LOCATION ?" end
+if #locations==0 then return SpecialistFinder.SMT("LOCATION ?","STANDORT ?") end
 local raw=trimText(locations[1])
 local area,count=string.match(raw,"^(.-)%s+warehouse%s+x(%d+)$")
 local text
 if area then
-text=trimText(area).." warehouse"
+text=trimText(area)..SpecialistFinder.SMT(" warehouse"," • Kontor")
 elseif raw~="" then
 text=raw
 else
-text="LOCATION ?"
+text=SpecialistFinder.SMT("LOCATION ?","STANDORT ?")
 end
-if #locations>1 then text=text.." +"..tostring(#locations-1).." locations" end
+if #locations>1 then text=text..SpecialistFinder.SMT(" +"," • +")..tostring(#locations-1)..SpecialistFinder.SMT(" locations"," weitere Standorte") end
 return text
 end
 local function opportunityDecisionLabel(a)
-if (a.stored or 0)<=0 then return "ALREADY DEPLOYED" end
-if (a.equipped or 0)==0 and a.verified and trimText(a.effects)~="" then return "DEPLOY NOW" end
-if (a.equipped or 0)>0 and a.verified and trimText(a.effects)~="" then return "SPARE COPY" end
-if (a.equipped or 0)==0 then return "VERIFY FIRST" end
-return "SPARE — VERIFY FIRST"
+if (a.stored or 0)<=0 then return SpecialistFinder.SMT("ALREADY DEPLOYED","BEREITS EINGESETZT") end
+if (a.equipped or 0)==0 and a.verified and trimText(a.effects)~="" then return SpecialistFinder.SMT("DEPLOY NOW","JETZT EINSETZEN") end
+if (a.equipped or 0)>0 and a.verified and trimText(a.effects)~="" then return SpecialistFinder.SMT("SPARE COPY","WEITERES EXEMPLAR") end
+if (a.equipped or 0)==0 then return SpecialistFinder.SMT("VERIFY FIRST","ZUERST PRÜFEN") end
+return SpecialistFinder.SMT("SPARE — VERIFY FIRST","WEITERES EXEMPLAR — ZUERST PRÜFEN")
 end
 local function opportunityDecisionReason(a)
-if (a.stored or 0)<=0 then return "No available stored copy." end
+if (a.stored or 0)<=0 then return SpecialistFinder.SMT("No available stored copy.","Kein verfügbares Exemplar im Kontor.") end
 if (a.equipped or 0)==0 and a.verified and trimText(a.effects)~="" then
-return "Verified specialist with no current placement."
+return SpecialistFinder.SMT("Verified specialist with no current placement.","Geprüfter Spezialist, derzeit nicht eingesetzt.")
 end
 if (a.equipped or 0)>0 and a.verified and trimText(a.effects)~="" then
-return "Already useful elsewhere; an additional copy is still available."
+return SpecialistFinder.SMT("Already useful elsewhere; an additional copy is still available.","Bereits eingesetzt; ein weiteres Exemplar ist verfügbar.")
 end
 if (a.equipped or 0)==0 then
-return "Completely unused, but its effect profile is not yet fully verified."
+return SpecialistFinder.SMT("Completely unused, but its effect profile is not yet fully verified.","Derzeit nicht eingesetzt; die Effekte sind noch nicht vollständig geprüft.")
 end
-return "Extra copy available, but its effect profile is not yet fully verified."
+return SpecialistFinder.SMT("Extra copy available, but its effect profile is not yet fully verified.","Weiteres Exemplar verfügbar; die Effekte sind noch nicht vollständig geprüft.")
+end
+function SpecialistFinder.AppendHeroicMetadata(lines,a)
+local heroic=SpecialistFinder.HEROIC_SPECIALISTS[tonumber(a and a.guid) or 0]
+if not heroic then return end
+lines[#lines+1]=SpecialistFinder.SMT(
+"Heroic Prestige requirement: ",
+"Heroische Ansehensanforderung: "
+)..tostring(heroic.neededPrestige)..SpecialistFinder.SMT(
+" • current-island eligibility not evaluated",
+" • Eignung für die aktuelle Insel nicht bewertet"
+)
+local boosted=(heroic.boostedBuffs and #heroic.boostedBuffs>0)
+lines[#lines+1]=SpecialistFinder.SMT("Heroic effect model: local ","Heroisches Effektmodell: lokal ")
+..tostring(heroic.localScope or "unknown")
+..(boosted and SpecialistFinder.SMT(" • boosted variant stored"," • verstärkte Variante gespeichert") or "")
+..SpecialistFinder.SMT(" • island-wide "," • inselweit ")
+..tostring(heroic.islandScope or "unknown")
 end
 local categoryLabel,confidenceLabel
 local function appendActionFirstCard(lines,index,a,jumpSlot,preference)
@@ -3292,20 +3592,21 @@ local loc=actionFirstStoredLocation(a)
 local jumpRef=preferredJumpRef(a,preference or "stored")
 local jumpSuffix=registerPageJump(jumpSlot,jumpRef,trimText(a.name))
 lines[#lines+1]=tostring(index)..". >>> "..opportunityDecisionLabel(a).." <<<"..jumpSuffix
-lines[#lines+1]=rarityText(a).." • "..opportunityDecisionReason(a)
-lines[#lines+1]="Location: "..loc
-lines[#lines+1]="Available: "..tostring(a.stored or 0).." • Equipped: "..tostring(a.equipped or 0)
-lines[#lines+1]="Category: "..categoryLabel(a).." • Confidence: "..confidenceLabel(a)
+lines[#lines+1]=SpecialistFinder.SMRarity(rarityText(a)).." • "..opportunityDecisionReason(a)
+lines[#lines+1]=SpecialistFinder.SMT("Location: ","Standort: ")..loc
+lines[#lines+1]=SpecialistFinder.SMT("Available: ","Verfügbar: ")..tostring(a.stored or 0)..SpecialistFinder.SMT(" • Equipped: "," • Eingesetzt: ")..tostring(a.equipped or 0)
+lines[#lines+1]=SpecialistFinder.SMT("Category: ","Bereich: ")..SpecialistFinder.SMCategory(categoryLabel(a))..SpecialistFinder.SMT(" • Confidence: "," • Bewertung: ")..SpecialistFinder.SMConfidence(confidenceLabel(a))
 local target=bestUseText(a)
-lines[#lines+1]="Target: "..(target~="" and target or "Not yet verified")
+lines[#lines+1]=SpecialistFinder.SMT("Target: ","Geeignet für: ")..(target~="" and SpecialistFinder.SMTarget(target) or SpecialistFinder.SMT("Not yet verified","Noch nicht geprüft"))
 local effectLines=compactEffectLines(a,2,70)
 if #effectLines>0 then
-lines[#lines+1]="Effects: "..effectLines[1]
-for i=2,#effectLines do lines[#lines+1]="         "..effectLines[i] end
+lines[#lines+1]=SpecialistFinder.SMT("Effects: ","Effekt: ")..SpecialistFinder.SMEffects(effectLines[1])
+for i=2,#effectLines do lines[#lines+1]="         "..SpecialistFinder.SMEffects(effectLines[i]) end
 else
-lines[#lines+1]="Effects: Not yet verified"
+lines[#lines+1]=SpecialistFinder.SMT("Effects: Not yet verified","Effekt: Noch nicht geprüft")
 end
-lines[#lines+1]="Specialist: "..trimText(a.name)
+SpecialistFinder.AppendHeroicMetadata(lines,a)
+lines[#lines+1]=SpecialistFinder.SMT("Specialist: ","Spezialist: ")..SpecialistFinder.SMDisplayName(a.guid,trimText(a.name))
 lines[#lines+1]=""
 lines[#lines+1]=shortRecommendation(a)
 lines[#lines+1]="----------------------------------------"
@@ -3314,20 +3615,21 @@ end
 local function appendCompactCard(lines,index,a,includeRecommendation)
 local status
 if (a.equipped or 0)==0 then
-status="[UNUSED] "..tostring(a.stored or 0).." AVAILABLE"
+status=SpecialistFinder.SMT("[UNUSED] "..tostring(a.stored or 0).." AVAILABLE","[NICHT EINGESETZT] "..tostring(a.stored or 0).." VERFÜGBAR")
 elseif (a.stored or 0)>0 then
-status="[SPARE] "..tostring(a.stored).." AVAILABLE • "..tostring(a.equipped).." EQUIPPED"
+status=SpecialistFinder.SMT("[SPARE] "..tostring(a.stored).." AVAILABLE • "..tostring(a.equipped).." EQUIPPED","[WEITERES EXEMPLAR] "..tostring(a.stored).." VERFÜGBAR • "..tostring(a.equipped).." EINGESETZT")
 else
-status="[FULLY DEPLOYED] "..tostring(a.equipped or 0)
+status=SpecialistFinder.SMT("[FULLY DEPLOYED] "..tostring(a.equipped or 0),"[VOLLSTÄNDIG EINGESETZT] "..tostring(a.equipped or 0))
 end
-lines[#lines+1]=tostring(index)..". "..string.upper(trimText(a.name)).." — "..rarityText(a)
+lines[#lines+1]=tostring(index)..". "..string.upper(SpecialistFinder.SMDisplayName(a.guid,trimText(a.name))).." — "..SpecialistFinder.SMRarity(rarityText(a))
 local target=bestUseText(a)
 local loc=compactStoredLocationText(a,1)
 local statusLine=status
-if target~="" then statusLine=statusLine.." • "..string.upper(target) end
+if target~="" then statusLine=statusLine.." • "..string.upper(SpecialistFinder.SMTarget(target)) end
 if loc~="" then statusLine=statusLine.." • "..loc end
 lines[#lines+1]=statusLine
-for _,effectLine in ipairs(compactEffectLines(a,2,76)) do lines[#lines+1]=effectLine end
+for _,effectLine in ipairs(compactEffectLines(a,2,76)) do lines[#lines+1]=SpecialistFinder.SMEffects(effectLine) end
+SpecialistFinder.AppendHeroicMetadata(lines,a)
 if includeRecommendation then lines[#lines+1]=shortRecommendation(a) end
 lines[#lines+1]="----------------------------------------"
 lines[#lines+1]=""
@@ -3649,15 +3951,19 @@ if r.comparison.classification=="CLEAR SHARED-EFFECT UPGRADE" then clear=clear+1
 elseif r.comparison.classification=="MIXED TRADE-OFF" then mixed=mixed+1 end
 end
 local lines={}
-lines[#lines+1]="IMPROVE EQUIPPED SPECIALISTS"
+lines[#lines+1]=SpecialistFinder.SMT("IMPROVE EQUIPPED SPECIALISTS","EINGESETZTE SPEZIALISTEN OPTIMIEREN")
+if SpecialistFinder.SMLang()=="de" then
+lines[#lines+1]=string.upper(provinceLabel(currentSession())).." • "..tostring(clear).." KLARE VERBESSERUNG"..(clear==1 and "" or "EN").." • "..tostring(mixed).." ÄNDERUNG"..(mixed==1 and "" or "EN").." ZU PRÜFEN"
+else
 lines[#lines+1]=string.upper(provinceLabel(currentSession())).." • "..tostring(clear).." CLEAR IMPROVEMENT"..(clear==1 and "" or "S").." • "..tostring(mixed).." CHANGE"..(mixed==1 and "" or "S").." TO REVIEW"
-lines[#lines+1]="Clear improvements are shown first."
+end
+lines[#lines+1]=SpecialistFinder.SMT("Clear improvements are shown first.","Klare Verbesserungen werden zuerst angezeigt.")
 lines[#lines+1]="----------------------------------------"
 lines[#lines+1]=""
 if #reviews==0 then
-lines[#lines+1]="No clear improvements were found among the specialists whose effects are currently verified."
+lines[#lines+1]=SpecialistFinder.SMT("No clear improvements were found among the specialists whose effects are currently verified.","Unter den Spezialisten mit derzeit geprüften Effekten wurden keine klaren Verbesserungen gefunden.")
 lines[#lines+1]=""
-lines[#lines+1]="This does not mean every equipped specialist is optimal; many specialist effects still need verification."
+lines[#lines+1]=SpecialistFinder.SMT("This does not mean every equipped specialist is optimal; many specialist effects still need verification.","Das bedeutet nicht, dass jeder eingesetzte Spezialist optimal ist; viele Spezialisteneffekte müssen noch geprüft werden.")
 return table.concat(lines,"\n")
 end
 for i=1,math.min(#reviews,9) do
@@ -3665,38 +3971,39 @@ local r=reviews[i]
 local a,c,cmp=r.candidate,r.current,r.comparison
 local location=trimText(r.location)
 location=string.gsub(location,"Governor's Villa","Villa")
+location=SpecialistFinder.SMLocation(location)
 location=string.gsub(location," — "," / ")
 local isClear=cmp.classification=="CLEAR SHARED-EFFECT UPGRADE"
 local improveSuffix=registerPageJump(i,preferredJumpRef(a,"stored"),trimText(a.name))
 lines[#lines+1]=tostring(i)..". "..string.upper(location)
 lines[#lines+1]=""
-lines[#lines+1]="CURRENTLY EQUIPPED"
-lines[#lines+1]=trimText(c.name)
+lines[#lines+1]=SpecialistFinder.SMT("CURRENTLY EQUIPPED","DERZEIT EINGESETZT")
+lines[#lines+1]=SpecialistFinder.SMDisplayName(c.guid,trimText(c.name))
 local currentEffects=compactEffectParts(c)
-if #currentEffects>0 then lines[#lines+1]=table.concat(currentEffects," • ") end
+if #currentEffects>0 then lines[#lines+1]=SpecialistFinder.SMEffects(table.concat(currentEffects," • ")) end
 lines[#lines+1]=""
-lines[#lines+1]=(isClear and "BETTER SPECIALIST AVAILABLE" or "POSSIBLE ALTERNATIVE")
-lines[#lines+1]=trimText(a.name)..improveSuffix
+lines[#lines+1]=(isClear and SpecialistFinder.SMT("BETTER SPECIALIST AVAILABLE","BESSERER SPEZIALIST VERFÜGBAR") or SpecialistFinder.SMT("POSSIBLE ALTERNATIVE","MÖGLICHE ALTERNATIVE"))
+lines[#lines+1]=SpecialistFinder.SMDisplayName(a.guid,trimText(a.name))..improveSuffix
 local candidateEffects=compactEffectParts(a)
-if #candidateEffects>0 then lines[#lines+1]=table.concat(candidateEffects," • ") end
+if #candidateEffects>0 then lines[#lines+1]=SpecialistFinder.SMEffects(table.concat(candidateEffects," • ")) end
 lines[#lines+1]=""
 if isClear then
-lines[#lines+1]=">>> RECOMMENDATION: REPLACE "..string.upper(trimText(c.name)).." <<<"
+lines[#lines+1]=SpecialistFinder.SMT(">>> RECOMMENDATION: REPLACE "..string.upper(trimText(c.name)).." <<<",">>> EMPFEHLUNG: "..string.upper(SpecialistFinder.SMDisplayName(c.guid,trimText(c.name))).." ERSETZEN <<<")
 for _,text in ipairs(cmp.improvements or {}) do
-lines[#lines+1]="IMPROVEMENT: "..text
+lines[#lines+1]=SpecialistFinder.SMT("IMPROVEMENT: ","VERBESSERUNG: ")..SpecialistFinder.SMEffects(text)
 end
 else
-lines[#lines+1]=">>> REVIEW BEFORE REPLACING <<<"
-for _,text in ipairs(cmp.improvements or {}) do lines[#lines+1]="IMPROVES: "..text end
-for _,text in ipairs(cmp.worsenings or {}) do lines[#lines+1]="BUT WORSE: "..text end
-for _,text in ipairs(cmp.missingCurrent or {}) do lines[#lines+1]="YOU WOULD LOSE: "..text end
+lines[#lines+1]=SpecialistFinder.SMT(">>> REVIEW BEFORE REPLACING <<<",">>> VOR DEM ERSETZEN PRÜFEN <<<")
+for _,text in ipairs(cmp.improvements or {}) do lines[#lines+1]=SpecialistFinder.SMT("IMPROVES: ","VERBESSERT: ")..SpecialistFinder.SMEffects(text) end
+for _,text in ipairs(cmp.worsenings or {}) do lines[#lines+1]=SpecialistFinder.SMT("BUT WORSE: ","ABER SCHLECHTER: ")..SpecialistFinder.SMEffects(text) end
+for _,text in ipairs(cmp.missingCurrent or {}) do lines[#lines+1]=SpecialistFinder.SMT("YOU WOULD LOSE: ","DU WÜRDEST VERLIEREN: ")..SpecialistFinder.SMEffects(text) end
 end
 local stored=compactStoredLocationText(a,2)
-if stored~="" then lines[#lines+1]="AVAILABLE IN: "..stored end
+if stored~="" then lines[#lines+1]=SpecialistFinder.SMT("AVAILABLE IN: ","VERFÜGBAR IN: ")..stored end
 lines[#lines+1]="----------------------------------------"
 lines[#lines+1]=""
 end
-if #reviews>9 then lines[#lines+1]="Showing the first 9 of "..tostring(#reviews).." possible changes so every displayed recommendation has a Ctrl+Alt+1…9 jump." end
+if #reviews>9 then lines[#lines+1]=SpecialistFinder.SMT("Showing the first 9 of "..tostring(#reviews).." possible changes so every displayed recommendation has a Ctrl+Alt+1…9 jump.","Es werden die ersten 9 von "..tostring(#reviews).." möglichen Änderungen angezeigt, damit jede Empfehlung mit Ctrl+Alt+1…9 angesprungen werden kann.") end
 return table.concat(lines,"\n")
 end
 local PURPOSES = {
@@ -3744,33 +4051,33 @@ for _,a in ipairs(all) do
 if a.total>0 and a.verified and purpose.match(a) then matches[#matches+1]=a end
 end
 sortPurposeList(matches)
-local lines={reportHeader("FIND BY PURPOSE — "..purpose.name,all,page,6,"Verified specialists • strongest available options first")}
+local lines={reportHeader(SpecialistFinder.SMT("FIND BY PURPOSE — ","NACH EINSATZBEREICH — ")..SpecialistFinder.SMPurpose(purpose.name),all,page,6,SpecialistFinder.SMT("Verified specialists • strongest available options first","Geprüfte Spezialisten • stärkste verfügbare Optionen zuerst"))}
 if #matches==0 then
-lines[#lines+1]="No verified owned specialists matched this purpose."
+lines[#lines+1]=SpecialistFinder.SMT("No verified owned specialists matched this purpose.","Keine deiner geprüften Spezialisten passen zu diesem Einsatzbereich.")
 return table.concat(lines,"\n")
 end
 local limit=math.min(#matches,12)
-lines[#lines+1]="Showing "..tostring(limit).." of "..tostring(#matches).." matching specialists. Ctrl+Alt+1…9 jumps to the corresponding stored specialist when available."
+lines[#lines+1]=SpecialistFinder.SMT("Showing "..tostring(limit).." of "..tostring(#matches).." matching specialists. Ctrl+Alt+1…9 jumps to the corresponding stored specialist when available.","Es werden "..tostring(limit).." von "..tostring(#matches).." passenden Spezialisten angezeigt. Ctrl+Alt+1…9 springt zum jeweiligen gelagerten Spezialisten, sofern verfügbar.")
 lines[#lines+1]=""
 for i=1,limit do
 local a=matches[i]
 local jumpSuffix=registerPageJump(i,preferredJumpRef(a,"stored"),trimText(a.name))
 local status
-if (a.equipped or 0)==0 then status="[UNUSED] "..tostring(a.stored or 0).." AVAILABLE"
-elseif (a.stored or 0)>0 then status="[SPARE] "..tostring(a.stored).." AVAILABLE • "..tostring(a.equipped).." EQUIPPED"
-else status="[FULLY DEPLOYED] "..tostring(a.equipped or 0) end
-lines[#lines+1]=tostring(i)..". "..string.upper(trimText(a.name)).." — "..rarityText(a)..jumpSuffix
+if (a.equipped or 0)==0 then status=SpecialistFinder.SMT("[UNUSED] "..tostring(a.stored or 0).." AVAILABLE","[NICHT EINGESETZT] "..tostring(a.stored or 0).." VERFÜGBAR")
+elseif (a.stored or 0)>0 then status=SpecialistFinder.SMT("[SPARE] "..tostring(a.stored).." AVAILABLE • "..tostring(a.equipped).." EQUIPPED","[WEITERES EXEMPLAR] "..tostring(a.stored).." VERFÜGBAR • "..tostring(a.equipped).." EINGESETZT")
+else status=SpecialistFinder.SMT("[FULLY DEPLOYED] "..tostring(a.equipped or 0),"[VOLLSTÄNDIG EINGESETZT] "..tostring(a.equipped or 0)) end
+lines[#lines+1]=tostring(i)..". "..string.upper(SpecialistFinder.SMDisplayName(a.guid,trimText(a.name))).." — "..SpecialistFinder.SMRarity(rarityText(a))..jumpSuffix
 local target=bestUseText(a)
 local loc=compactStoredLocationText(a,1)
 local statusLine=status
-if target~="" then statusLine=statusLine.." • "..string.upper(target) end
+if target~="" then statusLine=statusLine.." • "..string.upper(SpecialistFinder.SMTarget(target)) end
 if loc~="" then statusLine=statusLine.." • "..loc end
 lines[#lines+1]=statusLine
-for _,effectLine in ipairs(compactEffectLines(a,2,76)) do lines[#lines+1]=effectLine end
+for _,effectLine in ipairs(compactEffectLines(a,2,76)) do lines[#lines+1]=SpecialistFinder.SMEffects(effectLine) end
 lines[#lines+1]="----------------------------------------"
 lines[#lines+1]=""
 end
-if #matches>limit then lines[#lines+1]="+ "..tostring(#matches-limit).." more matches. Use All Specialists for the complete inventory." end
+if #matches>limit then lines[#lines+1]=SpecialistFinder.SMT("+ "..tostring(#matches-limit).." more matches. Use All Specialists for the complete inventory.","+ "..tostring(#matches-limit).." weitere Treffer. Nutze Alle Spezialisten für die vollständige Übersicht.") end
 return table.concat(lines,"\n")
 end
 local function aggregateSessionCached(session)
@@ -3812,12 +4119,12 @@ local pageCount=math.max(1,math.ceil(#slots/9))
 page=math.max(1,math.min(pageCount,page))
 local first=(page-1)*9+1
 local last=math.min(#slots,page*9)
-local lines={"EMPTY SLOT OPPORTUNITIES",string.upper(provinceLabel(reportSession)).." • "..tostring(#slots).." detected empty specialist slots • PAGE "..tostring(page).." / "..tostring(pageCount),"Each parchment page has at most 9 entries so Ctrl+Alt+1…9 always maps to the visible page.","----------------------------------------",""}
+local lines={SpecialistFinder.SMT("EMPTY SLOT OPPORTUNITIES","FREIE SPEZIALISTENPLÄTZE"),string.upper(provinceLabel(reportSession))..SpecialistFinder.SMT(" • "..tostring(#slots).." detected empty specialist slots • PAGE "..tostring(page).." / "..tostring(pageCount)," • "..tostring(#slots).." freie Spezialistenplätze erkannt • SEITE "..tostring(page).." / "..tostring(pageCount)),SpecialistFinder.SMT("Each parchment page has at most 9 entries so Ctrl+Alt+1…9 always maps to the visible page.","Jede Pergamentseite enthält höchstens 9 Einträge, damit Ctrl+Alt+1…9 immer zur sichtbaren Seite passt."),"----------------------------------------",""}
 if #slots==0 then
-lines[#lines+1]="No empty specialist socket entries were exposed by ItemContainer.Sockets in the scanned data."
+lines[#lines+1]=SpecialistFinder.SMT("No empty specialist socket entries were exposed by ItemContainer.Sockets in the scanned data.","In den gescannten Daten wurden keine freien Spezialistenplätze über ItemContainer.Sockets gemeldet.")
 lines[#lines+1]=""
-lines[#lines+1]="This can mean your scanned specialist hosts are full, or that Anno does not expose completely empty sockets through this table."
-lines[#lines+1]="The log now records EMPTY SPECIALIST SLOT SUMMARY so we can verify which case applies."
+lines[#lines+1]=SpecialistFinder.SMT("This can mean your scanned specialist hosts are full, or that Anno does not expose completely empty sockets through this table.","Das kann bedeuten, dass deine gescannten Spezialistengebäude voll belegt sind oder dass Anno vollständig leere Plätze über diese Tabelle nicht bereitstellt.")
+lines[#lines+1]=SpecialistFinder.SMT("The log now records EMPTY SPECIALIST SLOT SUMMARY so we can verify which case applies.","Das Log erfasst EMPTY SPECIALIST SLOT SUMMARY, damit sich der Fall überprüfen lässt.")
 return table.concat(lines,"\n")
 end
 for i=first,last do
@@ -3837,37 +4144,42 @@ local as,bs=opportunityScore(a),opportunityScore(b)
 if as~=bs then return as>bs end
 return trimText(a.name)<trimText(b.name)
 end)
-local host=provinceLabel(slot.sessionGUID).." / "..trimText(slot.areaName).." / "..trimText(slot.buildingType)
+local host=provinceLabel(slot.sessionGUID).." / "..trimText(slot.areaName).." / "..SpecialistFinder.SMLocation(trimText(slot.buildingType))
 if trimText(slot.objectName)~="" then host=host.." "..trimText(slot.objectName) end
 local slotRef={sessionGUID=slot.sessionGUID,objectIDRaw=slot.objectIDRaw,objectID=slot.objectID,kind="empty-slot",direct=true}
-lines[#lines+1]=tostring(jumpSlot)..". EMPTY SLOT — "..host.." / slot "..tostring(slot.slot)
+lines[#lines+1]=tostring(jumpSlot)..SpecialistFinder.SMT(". EMPTY SLOT — ",". FREIER PLATZ — ")..host..SpecialistFinder.SMT(" / slot "," / Platz ")..tostring(slot.slot)
 local emptySuffix=registerPageJump(jumpSlot,slotRef,host.." / slot "..tostring(slot.slot))
 if #candidates>0 then
 local a=candidates[1]
-lines[#lines+1]="Suggested candidate: "..trimText(a.name).." — "..rarityText(a).." • "..categoryLabel(a).." • confidence "..confidenceLabel(a)
-lines[#lines+1]="Available: "..tostring(a.stored or 0).." • "..shortRecommendation(a)
-local loc=compactStoredLocationText(a,1); if loc~="" then lines[#lines+1]="Stored: "..loc end
+local isHeroic=SpecialistFinder.HEROIC_SPECIALISTS[tonumber(a.guid) or 0]~=nil
+local candidatePrefix=isHeroic
+and SpecialistFinder.SMT("Candidate to review: ","Zu prüfender Kandidat: ")
+or SpecialistFinder.SMT("Suggested candidate: ","Empfohlener Kandidat: ")
+lines[#lines+1]=candidatePrefix..SpecialistFinder.SMDisplayName(a.guid,trimText(a.name)).." — "..SpecialistFinder.SMRarity(rarityText(a)).." • "..SpecialistFinder.SMCategory(categoryLabel(a))..SpecialistFinder.SMT(" • confidence "," • Bewertung ")..SpecialistFinder.SMConfidence(confidenceLabel(a))
+lines[#lines+1]=SpecialistFinder.SMT("Available: ","Verfügbar: ")..tostring(a.stored or 0).." • "..shortRecommendation(a)
+SpecialistFinder.AppendHeroicMetadata(lines,a)
+local loc=compactStoredLocationText(a,1); if loc~="" then lines[#lines+1]=SpecialistFinder.SMT("Stored: ","Gelagert: ")..loc end
 else
-lines[#lines+1]="No stored candidate of the correct broad ship/building category was found in this province."
+lines[#lines+1]=SpecialistFinder.SMT("No stored candidate of the correct broad ship/building category was found in this province.","In dieser Provinz wurde kein gelagerter Kandidat der passenden Schiff-/Gebäudekategorie gefunden.")
 end
-lines[#lines+1]="Jump: Ctrl+Alt+"..tostring(jumpSlot).." → empty slot host"..emptySuffix
-lines[#lines+1]="Note: the in-game picker remains the final compatibility check."
+lines[#lines+1]=SpecialistFinder.SMT("Jump: Ctrl+Alt+","Sprung: Ctrl+Alt+")..tostring(jumpSlot)..SpecialistFinder.SMT(" → empty slot host"," → Gebäude mit freiem Platz")..emptySuffix
+lines[#lines+1]=SpecialistFinder.SMT("Note: the in-game picker remains the final compatibility check.","Hinweis: Die Auswahl im Spiel bleibt die abschließende Kompatibilitätsprüfung.")
 lines[#lines+1]="----------------------------------------"; lines[#lines+1]=""
 end
-if pageCount>1 then lines[#lines+1]="Use the parchment arrows for the next/previous 9 empty-slot opportunities." end
+if pageCount>1 then lines[#lines+1]=SpecialistFinder.SMT("Use the parchment arrows for the next/previous 9 empty-slot opportunities.","Nutze die Pergamentpfeile für die nächsten/vorherigen 9 freien Spezialistenplätze.") end
 return table.concat(lines,"\n")
 end
 local function appendChangeGroup(lines,title,list,detailKey,byGuid,preference,jumpState)
 lines[#lines+1]=title.." — "..tostring(#(list or {}))
 if #(list or {})==0 then
-lines[#lines+1]="None"
+lines[#lines+1]=SpecialistFinder.SMT("None","Keine")
 else
 for i=1,math.min(#list,12) do
 local x=list[i]
 local extra=""
 if detailKey=="delta" then extra=" ×"..tostring(x.delta or 1)
-elseif detailKey=="stored" then extra=" • "..tostring(x.stored or 0).." stored"
-elseif detailKey=="equipped" then extra=" • "..tostring(x.equipped or 0).." equipped" end
+elseif detailKey=="stored" then extra=SpecialistFinder.SMT(" • "..tostring(x.stored or 0).." stored"," • "..tostring(x.stored or 0).." gelagert")
+elseif detailKey=="equipped" then extra=SpecialistFinder.SMT(" • "..tostring(x.equipped or 0).." equipped"," • "..tostring(x.equipped or 0).." eingesetzt") end
 local suffix=""
 local a=byGuid and byGuid[x.guid] or nil
 if a and jumpState and (jumpState.slot or 0)<9 then
@@ -3878,19 +4190,19 @@ local directRef={sessionGUID=ref.sessionGUID,objectIDRaw=ref.objectIDRaw,objectI
 suffix=registerPageJump(jumpState.slot,directRef,trimText(x.name))
 end
 end
-lines[#lines+1]="• "..tostring(x.name)..extra..suffix
+lines[#lines+1]="• "..SpecialistFinder.SMDisplayName(x.guid,tostring(x.name))..extra..suffix
 end
-if #list>12 then lines[#lines+1]="+ "..tostring(#list-12).." more" end
+if #list>12 then lines[#lines+1]=SpecialistFinder.SMT("+ "..tostring(#list-12).." more","+ "..tostring(#list-12).." weitere") end
 end
 lines[#lines+1]=""
 end
 local function buildChangesReport()
 local session=currentSession()
 local c=SpecialistFinder.ScanChanges[session]
-local lines={"WHAT CHANGED SINCE LAST SCAN",string.upper(provinceLabel(session)),"----------------------------------------",""}
+local lines={SpecialistFinder.SMT("WHAT CHANGED SINCE LAST SCAN","ÄNDERUNGEN SEIT DEM LETZTEN SCAN"),string.upper(provinceLabel(session)),"----------------------------------------",""}
 if not c or c.baseline then
-lines[#lines+1]="This is the first comparison baseline for this province."
-lines[#lines+1]="Run 'Scan Again / What Changed?' later to compare against this snapshot."
+lines[#lines+1]=SpecialistFinder.SMT("This is the first comparison baseline for this province.","Dies ist die erste Vergleichsbasis für diese Provinz.")
+lines[#lines+1]=SpecialistFinder.SMT("Run 'Scan Again / What Changed?' later to compare against this snapshot.","Führe später 'Neu scannen / Änderungen anzeigen' aus, um mit diesem Stand zu vergleichen.")
 return table.concat(lines,"\n")
 end
 local byGuid={}
@@ -3898,13 +4210,13 @@ for _,a in ipairs(aggregateCurrentProvince()) do byGuid[a.guid]=a end
 local jumpState={slot=0}
 local explainedEquipped={}
 local explainedRemoved={}
-lines[#lines+1]="PLACEMENT CHANGES"
+lines[#lines+1]=SpecialistFinder.SMT("PLACEMENT CHANGES","ÄNDERUNGEN BEI EINSATZORTEN")
 local placementCount=#(c.filledSlots or {})+#(c.newEmptySlots or {})+#(c.replacedSlots or {})
 if placementCount==0 then
-lines[#lines+1]="None"
+lines[#lines+1]=SpecialistFinder.SMT("None","Keine")
 else
 for _,er in ipairs(c.filledSlots or {}) do
-local host=tostring(er.areaName).." • "..tostring(er.buildingType).." • slot "..tostring(er.slot)
+local host=tostring(er.areaName).." • "..SpecialistFinder.SMLocation(tostring(er.buildingType))..SpecialistFinder.SMT(" • slot "," • Platz ")..tostring(er.slot)
 if er.filledWithGuid then explainedEquipped[er.filledWithGuid]=(explainedEquipped[er.filledWithGuid] or 0)+1 end
 local suffix=""
 if er.currentRow and (jumpState.slot or 0)<9 then
@@ -3914,10 +4226,10 @@ local ref={sessionGUID=session,objectIDRaw=row.objectIDRaw,objectID=row.objectID
 suffix=registerPageJump(jumpState.slot,ref,trimText(er.filledWithName or "filled slot"))
 end
 lines[#lines+1]="• "..host
-if trimText(er.filledWithName or "")~="" then lines[#lines+1]="  Filled with: "..trimText(er.filledWithName)..suffix else lines[#lines+1]="  Slot filled"..suffix end
+if trimText(er.filledWithName or "")~="" then lines[#lines+1]=SpecialistFinder.SMT("  Filled with: ","  Belegt mit: ")..SpecialistFinder.SMDisplayName(er.filledWithGuid,trimText(er.filledWithName))..suffix else lines[#lines+1]=SpecialistFinder.SMT("  Slot filled","  Platz belegt")..suffix end
 end
 for _,er in ipairs(c.newEmptySlots or {}) do
-local host=tostring(er.areaName).." • "..tostring(er.buildingType).." • slot "..tostring(er.slot)
+local host=tostring(er.areaName).." • "..SpecialistFinder.SMLocation(tostring(er.buildingType))..SpecialistFinder.SMT(" • slot "," • Platz ")..tostring(er.slot)
 if er.removedGuid then explainedRemoved[er.removedGuid]=true end
 local suffix=""
 if (jumpState.slot or 0)<9 then
@@ -3926,10 +4238,10 @@ local ref={sessionGUID=session,objectIDRaw=er.objectIDRaw,objectID=er.objectID,a
 suffix=registerPageJump(jumpState.slot,ref,host)
 end
 lines[#lines+1]="• "..host
-if trimText(er.removedName or "")~="" then lines[#lines+1]="  Removed: "..trimText(er.removedName).." → slot is now empty"..suffix else lines[#lines+1]="  Specialist removed → slot is now empty"..suffix end
+if trimText(er.removedName or "")~="" then lines[#lines+1]=SpecialistFinder.SMT("  Removed: ","  Entfernt: ")..SpecialistFinder.SMDisplayName(er.removedGuid,trimText(er.removedName))..SpecialistFinder.SMT(" → slot is now empty"," → Platz ist jetzt frei")..suffix else lines[#lines+1]=SpecialistFinder.SMT("  Specialist removed → slot is now empty","  Spezialist entfernt → Platz ist jetzt frei")..suffix end
 end
 for _,er in ipairs(c.replacedSlots or {}) do
-local host=tostring(er.areaName).." • "..tostring(er.buildingType).." • slot "..tostring(er.slot)
+local host=tostring(er.areaName).." • "..SpecialistFinder.SMLocation(tostring(er.buildingType))..SpecialistFinder.SMT(" • slot "," • Platz ")..tostring(er.slot)
 if er.newGuid then explainedEquipped[er.newGuid]=(explainedEquipped[er.newGuid] or 0)+1 end
 if er.oldGuid then explainedRemoved[er.oldGuid]=true end
 local suffix=""
@@ -3940,15 +4252,15 @@ local ref={sessionGUID=session,objectIDRaw=row.objectIDRaw,objectID=row.objectID
 suffix=registerPageJump(jumpState.slot,ref,trimText(er.newName or "replacement"))
 end
 lines[#lines+1]="• "..host
-lines[#lines+1]="  Replaced: "..trimText(er.oldName or "previous specialist").." → "..trimText(er.newName or "new specialist")..suffix
+lines[#lines+1]=SpecialistFinder.SMT("  Replaced: ","  Ersetzt: ")..SpecialistFinder.SMDisplayName(er.oldGuid,trimText(er.oldName or SpecialistFinder.SMT("previous specialist","vorheriger Spezialist"))).." → "..SpecialistFinder.SMDisplayName(er.newGuid,trimText(er.newName or SpecialistFinder.SMT("new specialist","neuer Spezialist")))..suffix
 end
 end
 lines[#lines+1]=""
-lines[#lines+1]="INVENTORY CHANGES"
+lines[#lines+1]=SpecialistFinder.SMT("INVENTORY CHANGES","BESTANDSÄNDERUNGEN")
 local inventoryLines=0
 if #(c.acquired or {})>0 then
-lines[#lines+1]="New copies acquired — "..tostring(#c.acquired)
-for _,x in ipairs(c.acquired) do lines[#lines+1]="• "..tostring(x.name).." ×"..tostring(x.delta or 1) end
+lines[#lines+1]=SpecialistFinder.SMT("New copies acquired — ","Neue Exemplare erhalten — ")..tostring(#c.acquired)
+for _,x in ipairs(c.acquired) do lines[#lines+1]="• "..SpecialistFinder.SMDisplayName(x.guid,tostring(x.name)).." ×"..tostring(x.delta or 1) end
 inventoryLines=inventoryLines+1
 end
 local extraEquipped={}
@@ -3957,29 +4269,29 @@ local remaining=(x.delta or 1)-(explainedEquipped[x.guid] or 0)
 if remaining>0 then extraEquipped[#extraEquipped+1]={guid=x.guid,name=x.name,delta=remaining} end
 end
 if #extraEquipped>0 then
-appendChangeGroup(lines,"OTHER NEW EQUIPPED PLACEMENTS",extraEquipped,"delta",byGuid,"equipped",jumpState)
+appendChangeGroup(lines,SpecialistFinder.SMT("OTHER NEW EQUIPPED PLACEMENTS","WEITERE NEUE EINSATZORTE"),extraEquipped,"delta",byGuid,"equipped",jumpState)
 inventoryLines=inventoryLines+1
 end
 local unused={}
 for _,x in ipairs(c.becameUnused or {}) do if not explainedRemoved[x.guid] then unused[#unused+1]=x end end
 if #unused>0 then
-appendChangeGroup(lines,"BECAME UNUSED",unused,"stored",byGuid,"stored",jumpState)
+appendChangeGroup(lines,SpecialistFinder.SMT("BECAME UNUSED","JETZT NICHT EINGESETZT"),unused,"stored",byGuid,"stored",jumpState)
 inventoryLines=inventoryLines+1
 end
 if #(c.moved or {})>0 then
-appendChangeGroup(lines,"MOVED BETWEEN PLACEMENTS",c.moved,"equipped",byGuid,"equipped",jumpState)
+appendChangeGroup(lines,SpecialistFinder.SMT("MOVED BETWEEN PLACEMENTS","ZWISCHEN EINSATZORTEN VERSCHOBEN"),c.moved,"equipped",byGuid,"equipped",jumpState)
 inventoryLines=inventoryLines+1
 end
 if #(c.lost or {})>0 then
-lines[#lines+1]="Copies no longer owned — "..tostring(#c.lost)
-for _,x in ipairs(c.lost) do lines[#lines+1]="• "..tostring(x.name).." ×"..tostring(x.delta or 1) end
+lines[#lines+1]=SpecialistFinder.SMT("Copies no longer owned — ","Nicht mehr vorhandene Exemplare — ")..tostring(#c.lost)
+for _,x in ipairs(c.lost) do lines[#lines+1]="• "..SpecialistFinder.SMDisplayName(x.guid,tostring(x.name)).." ×"..tostring(x.delta or 1) end
 lines[#lines+1]=""
 inventoryLines=inventoryLines+1
 end
-if inventoryLines==0 then lines[#lines+1]="None"; lines[#lines+1]="" end
+if inventoryLines==0 then lines[#lines+1]=SpecialistFinder.SMT("None","Keine"); lines[#lines+1]="" end
 local total=#(c.acquired or {})+#(c.newlyEquipped or {})+#(c.becameUnused or {})+#(c.moved or {})+#(c.lost or {})+#(c.newEmptySlots or {})+#(c.filledSlots or {})+#(c.replacedSlots or {})
-if total==0 then lines[#lines+1]="No specialist ownership or placement changes were detected." end
-if (jumpState.slot or 0)>0 then lines[#lines+1]="Ctrl+Alt+1…"..tostring(jumpState.slot).." opens the corresponding current specialist/location above." end
+if total==0 then lines[#lines+1]=SpecialistFinder.SMT("No specialist ownership or placement changes were detected.","Es wurden keine Änderungen an Spezialistenbestand oder Einsatzorten erkannt.") end
+if (jumpState.slot or 0)>0 then lines[#lines+1]=SpecialistFinder.SMT("Ctrl+Alt+1…"..tostring(jumpState.slot).." opens the corresponding current specialist/location above.","Ctrl+Alt+1…"..tostring(jumpState.slot).." öffnet den entsprechenden aktuellen Spezialisten/Einsatzort oben.") end
 return table.concat(lines,"\n")
 end
 local function shipRole(a)
@@ -4007,12 +4319,12 @@ if ai~=bi then return ai>bi end
 return trimText(a.name)<trimText(b.name)
 end)
 end
-local lines={"SHIP SPECIALIST RECOMMENDATIONS","Across scanned provinces • recommendations by ship role","You choose the ship; the mod highlights which owned captains fit each job.","----------------------------------------",""}
+local lines={SpecialistFinder.SMT("SHIP SPECIALIST RECOMMENDATIONS","EMPFEHLUNGEN FÜR SCHIFFSSPEZIALISTEN"),SpecialistFinder.SMT("Across scanned provinces • recommendations by ship role","Über gescannte Provinzen hinweg • Empfehlungen nach Schiffsrolle"),SpecialistFinder.SMT("You choose the ship; the mod highlights which owned captains fit each job.","Du wählst das Schiff; die Mod zeigt, welche deiner Kapitäne zu der jeweiligen Aufgabe passen."),"----------------------------------------",""}
 local jumpSlot=0
 for _,role in ipairs({'TRADE & LOGISTICS','MILITARY','SAILING & EXPLORATION','GENERAL SHIP'}) do
 local list=groups[role]
-lines[#lines+1]=role
-if #list==0 then lines[#lines+1]="No available verified/known candidates found." else
+lines[#lines+1]=SpecialistFinder.SMShipRole(role)
+if #list==0 then lines[#lines+1]=SpecialistFinder.SMT("No available verified/known candidates found.","Keine verfügbaren geprüften/bekannten Kandidaten gefunden.") else
 for i=1,math.min(#list,5) do
 local a=list[i]
 local shipSuffix=""
@@ -4021,31 +4333,31 @@ if ref and jumpSlot<9 then
 jumpSlot=jumpSlot+1
 shipSuffix=registerPageJump(jumpSlot,ref,trimText(a.name))
 end
-lines[#lines+1]=tostring(i)..". "..trimText(a.name).." — "..rarityText(a).." • available "..tostring(a.stored or 0).." • confidence "..confidenceLabel(a)..shipSuffix
-for _,eff in ipairs(compactEffectLines(a,1,86)) do lines[#lines+1]=eff end
-local loc=compactStoredLocationText(a,1); if loc~="" then lines[#lines+1]="Stored: "..loc end
+lines[#lines+1]=tostring(i)..". "..SpecialistFinder.SMDisplayName(a.guid,trimText(a.name)).." — "..SpecialistFinder.SMRarity(rarityText(a))..SpecialistFinder.SMT(" • available "," • verfügbar ")..tostring(a.stored or 0)..SpecialistFinder.SMT(" • confidence "," • Bewertung ")..SpecialistFinder.SMConfidence(confidenceLabel(a))..shipSuffix
+for _,eff in ipairs(compactEffectLines(a,1,86)) do lines[#lines+1]=SpecialistFinder.SMEffects(eff) end
+local loc=compactStoredLocationText(a,1); if loc~="" then lines[#lines+1]=SpecialistFinder.SMT("Stored: ","Gelagert: ")..loc end
 end
 end
 lines[#lines+1]="----------------------------------------"; lines[#lines+1]=""
 end
-lines[#lines+1]="Ctrl+Alt+1…9 is assigned in report order to the first nine jumpable stored specialists in the current province."
+lines[#lines+1]=SpecialistFinder.SMT("Ctrl+Alt+1…9 is assigned in report order to the first nine jumpable stored specialists in the current province.","Ctrl+Alt+1…9 ist in Berichtsreihenfolge den ersten neun anspringbaren gelagerten Spezialisten der aktuellen Provinz zugeordnet.")
 return table.concat(lines,"\n")
 end
 local function buildEmpireOverview()
 local all=aggregateEmpire()
 local sessions={"3245","6627"}
-local lines={"SPECIALIST EMPIRE OVERVIEW","Latium + Albion cached specialist picture","----------------------------------------",""}
+local lines={SpecialistFinder.SMT("SPECIALIST EMPIRE OVERVIEW","SPECIALIST MANAGEMENT — GESAMTÜBERSICHT"),SpecialistFinder.SMT("Latium + Albion cached specialist picture","Gespeicherte Spezialistenübersicht für Latium + Albion"),"----------------------------------------",""}
 for _,session in ipairs(sessions) do
 local storedRows=SpecialistFinder.StoredCache[session]
 local equippedData=SpecialistFinder.Cache[session]
 local scanned=SpecialistFinder.ScanReadySessions[session] == true and (storedRows ~= nil or equippedData ~= nil)
 if not scanned then
-lines[#lines+1]=string.upper(provinceLabel(session))..": NOT SCANNED"
-lines[#lines+1]="Switch to this province and press Ctrl+Alt+I once to add it."
+lines[#lines+1]=string.upper(provinceLabel(session))..SpecialistFinder.SMT(": NOT SCANNED",": NICHT GESCANNT")
+lines[#lines+1]=SpecialistFinder.SMT("Switch to this province and press Ctrl+Alt+I once to add it.","Wechsle in diese Provinz und drücke einmal Ctrl+Alt+I, um sie hinzuzufügen.")
 else
 local province=aggregateSessionCached(session)
 local stored,equipped,total=reportStats(province)
-lines[#lines+1]=string.upper(provinceLabel(session))..": "..tostring(#province).." TYPES • "..tostring(stored).." AVAILABLE • "..tostring(equipped).." EQUIPPED"
+lines[#lines+1]=string.upper(provinceLabel(session))..SpecialistFinder.SMT(": "..tostring(#province).." TYPES • "..tostring(stored).." AVAILABLE • "..tostring(equipped).." EQUIPPED",": "..tostring(#province).." TYPEN • "..tostring(stored).." VERFÜGBAR • "..tostring(equipped).." EINGESETZT")
 end
 lines[#lines+1]=""
 end
@@ -4056,13 +4368,13 @@ if (a.stored or 0)>0 and (a.equipped or 0)==0 then globallyUnused=globallyUnused
 if (a.stored or 0)>0 and (a.equipped or 0)>0 then globallySpare=globallySpare+1 end
 if (a.stored or 0)==0 and (a.equipped or 0)>0 then fullyDeployed=fullyDeployed+1 end
 end
-lines[#lines+1]="COMBINED CACHED EMPIRE"
-lines[#lines+1]=tostring(#all).." specialist types • "..tostring(stored).." available copies • "..tostring(equipped).." equipped placements"
-lines[#lines+1]=tostring(globallyUnused).." types completely unused across scanned provinces"
-lines[#lines+1]=tostring(globallySpare).." types with spare copies"
-lines[#lines+1]=tostring(fullyDeployed).." types fully deployed"
+lines[#lines+1]=SpecialistFinder.SMT("COMBINED CACHED EMPIRE","GESAMTE GESPEICHERTE ÜBERSICHT")
+lines[#lines+1]=SpecialistFinder.SMT(tostring(#all).." specialist types • "..tostring(stored).." available copies • "..tostring(equipped).." equipped placements",tostring(#all).." Spezialistentypen • "..tostring(stored).." verfügbare Exemplare • "..tostring(equipped).." Einsatzorte")
+lines[#lines+1]=SpecialistFinder.SMT(tostring(globallyUnused).." types completely unused across scanned provinces",tostring(globallyUnused).." Typen in den gescannten Provinzen vollständig ungenutzt")
+lines[#lines+1]=SpecialistFinder.SMT(tostring(globallySpare).." types with spare copies",tostring(globallySpare).." Typen mit weiteren Exemplaren")
+lines[#lines+1]=SpecialistFinder.SMT(tostring(fullyDeployed).." types fully deployed",tostring(fullyDeployed).." Typen vollständig eingesetzt")
 lines[#lines+1]=""
-lines[#lines+1]="Province cache status: Latium and Albion are retained independently while this game/mod session remains loaded."
+lines[#lines+1]=SpecialistFinder.SMT("Province cache status: Latium and Albion are retained independently while this game/mod session remains loaded.","Provinzspeicher: Latium und Albion werden getrennt gehalten, solange diese Spiel-/Mod-Sitzung geladen bleibt.")
 return table.concat(lines,"\n")
 end
 
@@ -4070,30 +4382,30 @@ local function buildBestFocusedReport(all,mode)
 local list={}
 local title,subtitle,why=""
 if mode=="best_use_now" then
-title="BEST OPPORTUNITIES — USE NOW"
-subtitle="Unused specialists with verified effects that look most useful to deploy next."
-why="Why these are here: you own them, they are not equipped anywhere, and we know enough about their effects to make a recommendation."
+title=SpecialistFinder.SMT("BEST OPPORTUNITIES — USE NOW","BESTE EINSATZMÖGLICHKEITEN — JETZT EINSETZEN")
+subtitle=SpecialistFinder.SMT("Unused specialists with verified effects that look most useful to deploy next.","Nicht eingesetzte Spezialisten mit geprüften Effekten, die aktuell besonders sinnvoll erscheinen.")
+why=SpecialistFinder.SMT("Why these are here: you own them, they are not equipped anywhere, and we know enough about their effects to make a recommendation.","Warum diese Spezialisten hier stehen: Du besitzt sie, sie sind derzeit nirgends eingesetzt und ihre Effekte sind ausreichend bekannt, um eine Empfehlung abzugeben.")
 for _,a in ipairs(all) do
 if a.stored>0 and a.equipped==0 and a.verified then list[#list+1]=a end
 end
 elseif mode=="best_spares" then
-title="BEST OPPORTUNITIES — USE SPARE COPIES"
-subtitle="Useful specialists already equipped somewhere, but with additional copies still available."
-why="Why these are here: at least one copy is already in use, but you still own an unused copy that may be useful elsewhere."
+title=SpecialistFinder.SMT("BEST OPPORTUNITIES — USE SPARE COPIES","BESTE EINSATZMÖGLICHKEITEN — WEITERE EXEMPLARE")
+subtitle=SpecialistFinder.SMT("Useful specialists already equipped somewhere, but with additional copies still available.","Nützliche Spezialisten, die bereits eingesetzt sind, von denen aber weitere Exemplare verfügbar sind.")
+why=SpecialistFinder.SMT("Why these are here: at least one copy is already in use, but you still own an unused copy that may be useful elsewhere.","Warum diese Spezialisten hier stehen: Mindestens ein Exemplar ist bereits eingesetzt, aber du besitzt noch ein weiteres verfügbares Exemplar.")
 for _,a in ipairs(all) do
 if a.stored>0 and a.equipped>0 then list[#list+1]=a end
 end
 elseif mode=="best_strong_unused" then
-title="BEST OPPORTUNITIES — STRONG SPECIALISTS NOT USED"
-subtitle="Your highest-ranked specialists that are completely unused."
-why="Why these are here: none of your copies are equipped. Verified effects rank first; other promising specialists follow."
+title=SpecialistFinder.SMT("BEST OPPORTUNITIES — STRONG SPECIALISTS NOT USED","BESTE EINSATZMÖGLICHKEITEN — STARKE NICHT EINGESETZTE SPEZIALISTEN")
+subtitle=SpecialistFinder.SMT("Your highest-ranked specialists that are completely unused.","Deine am höchsten bewerteten Spezialisten, die derzeit nicht eingesetzt sind.")
+why=SpecialistFinder.SMT("Why these are here: none of your copies are equipped. Verified effects rank first; other promising specialists follow.","Warum diese Spezialisten hier stehen: Keines deiner Exemplare ist eingesetzt. Spezialisten mit geprüften Effekten werden zuerst angezeigt.")
 for _,a in ipairs(all) do
 if a.stored>0 and a.equipped==0 then list[#list+1]=a end
 end
 elseif mode=="best_needs_review" then
-title="BEST OPPORTUNITIES — NEEDS REVIEW"
-subtitle="Unused specialists that may be valuable, but whose effects are not yet verified well enough."
-why="Why these are here: they are available to use, but the mod does not yet know enough to recommend a deployment confidently."
+title=SpecialistFinder.SMT("BEST OPPORTUNITIES — NEEDS REVIEW","BESTE EINSATZMÖGLICHKEITEN — NOCH PRÜFEN")
+subtitle=SpecialistFinder.SMT("Unused specialists that may be valuable, but whose effects are not yet verified well enough.","Nicht eingesetzte Spezialisten, die nützlich sein könnten, deren Effekte aber noch nicht ausreichend geprüft sind.")
+why=SpecialistFinder.SMT("Why these are here: they are available to use, but the mod does not yet know enough to recommend a deployment confidently.","Warum diese Spezialisten hier stehen: Sie sind verfügbar, aber die Mod kennt ihre Effekte noch nicht gut genug für eine sichere Empfehlung.")
 for _,a in ipairs(all) do
 if a.stored>0 and not a.verified then list[#list+1]=a end
 end
@@ -4107,23 +4419,28 @@ return trimText(a.name)<trimText(b.name)
 end)
 local lines={}
 lines[#lines+1]=title
-lines[#lines+1]=string.upper(provinceLabel(currentSession())).." • "..tostring(#list).." MATCH"..(#list==1 and "" or "ES")
+lines[#lines+1]=string.upper(provinceLabel(currentSession())).." • "..tostring(#list)..SpecialistFinder.SMT((#list==1 and " MATCH" or " MATCHES")," TREFFER")
 lines[#lines+1]=subtitle
 lines[#lines+1]=""
 lines[#lines+1]=why
 lines[#lines+1]="----------------------------------------"
 lines[#lines+1]=""
 if #list==0 then
-lines[#lines+1]="No specialists currently match this category."
+lines[#lines+1]=SpecialistFinder.SMT("No specialists currently match this category.","Derzeit passen keine Spezialisten in diese Kategorie.")
 return table.concat(lines,"\n")
 end
 local limit=math.min(#list,9)
 for i=1,limit do appendActionFirstCard(lines,i,list[i],i,"stored") end
 if #list>limit then
-lines[#lines+1]="Showing the first 9 of "..tostring(#list).."."
-lines[#lines+1]="Use All Best Opportunities for the combined ranked overview."
+lines[#lines+1]=SpecialistFinder.SMT("Showing the first 9 of "..tostring(#list)..".","Es werden die ersten 9 von "..tostring(#list).." angezeigt.")
+lines[#lines+1]=SpecialistFinder.SMT("Use All Best Opportunities for the combined ranked overview.","Nutze Alle besten Einsatzmöglichkeiten für die kombinierte Rangliste.")
 end
 return table.concat(lines,"\n")
+end
+
+local function decorateSpecialistReport(report)
+local banner=SpecialistFinder.SMT("<<< CTRL+ALT+0 — BACK TO SPECIALIST MANAGEMENT >>>","<<< CTRL+ALT+0 — ZURÜCK ZU SPECIALIST MANAGEMENT >>>")
+return banner.."\n\n"..tostring(report or "")
 end
 
 local function buildReport(marker)
@@ -4173,17 +4490,17 @@ local pageCount=3
 page=math.max(1,math.min(pageCount,page))
 local first=(page-1)*5+1
 local last=math.min(#opportunities,page*5)
-local extra=tostring(completelyUnused).." completely unused • "..tostring(verifiedUnused).." verified unused • "..tostring(clearCount).." clear upgrades"
-local lines={reportHeader("BEST OPPORTUNITIES",opportunities,page,pageCount,extra)}
+local extra=SpecialistFinder.SMT(tostring(completelyUnused).." completely unused • "..tostring(verifiedUnused).." verified unused • "..tostring(clearCount).." clear upgrades",tostring(completelyUnused).." vollständig ungenutzt • "..tostring(verifiedUnused).." geprüft und ungenutzt • "..tostring(clearCount).." klare Verbesserungen")
+local lines={reportHeader(SpecialistFinder.SMT("BEST OPPORTUNITIES","BESTE EINSATZMÖGLICHKEITEN"),opportunities,page,pageCount,extra)}
 if first>#opportunities then
-lines[#lines+1]="No more available specialists on this page."
+lines[#lines+1]=SpecialistFinder.SMT("No more available specialists on this page.","Auf dieser Seite sind keine weiteren verfügbaren Spezialisten.")
 return table.concat(lines,"\n")
 end
-lines[#lines+1]="Ranked by what looks most worth acting on now: unused verified specialists first, then spare copies, then specialists that need review."
+lines[#lines+1]=SpecialistFinder.SMT("Ranked by what looks most worth acting on now: unused verified specialists first, then spare copies, then specialists that need review.","Sortiert nach dem aktuell größten Handlungsnutzen: zuerst geprüfte ungenutzte Spezialisten, danach weitere Exemplare und anschließend Spezialisten, die noch geprüft werden sollten.")
 lines[#lines+1]=""
 for i=first,last do appendActionFirstCard(lines,i,opportunities[i],i-first+1,"stored") end
 if page==pageCount and #opportunities>15 then
-lines[#lines+1]="Best Opportunities shows the top 15. Use Unused Specialists for every available type."
+lines[#lines+1]=SpecialistFinder.SMT("Best Opportunities shows the top 15. Use Unused Specialists for every available type.","Beste Einsatzmöglichkeiten zeigt die Top 15. Nutze Nicht eingesetzte Spezialisten für alle verfügbaren Typen.")
 end
 return table.concat(lines,"\n")
 end
@@ -4194,12 +4511,12 @@ page=math.max(1,math.min(pageCount,page))
 local first,last=pageRange(#list,pageCount,page)
 local completelyUnused=0
 for _,a in ipairs(list) do if a.equipped==0 then completelyUnused=completelyUnused+1 end end
-local lines={reportHeader("UNUSED SPECIALISTS",list,page,pageCount,tostring(completelyUnused).." completely unused • spare copies follow")}
+local lines={reportHeader(SpecialistFinder.SMT("UNUSED SPECIALISTS","NICHT EINGESETZTE SPEZIALISTEN"),list,page,pageCount,SpecialistFinder.SMT(tostring(completelyUnused).." completely unused • spare copies follow",tostring(completelyUnused).." vollständig ungenutzt • weitere Exemplare folgen"))}
 if first>last then
-lines[#lines+1]="No specialists on this page."
+lines[#lines+1]=SpecialistFinder.SMT("No specialists on this page.","Keine Spezialisten auf dieser Seite.")
 return table.concat(lines,"\n")
 end
-lines[#lines+1]="ENTRIES "..tostring(first).."–"..tostring(last).." OF "..tostring(#list)
+lines[#lines+1]=SpecialistFinder.SMT("ENTRIES ","EINTRÄGE ")..tostring(first).."–"..tostring(last)..SpecialistFinder.SMT(" OF "," VON ")..tostring(#list)
 lines[#lines+1]=""
 for i=first,last do appendActionFirstCard(lines,i,list[i],i-first+1,"stored") end
 return table.concat(lines,"\n")
@@ -4209,24 +4526,24 @@ sortAlphabetical(list)
 local pageCount=6
 page=math.max(1,math.min(pageCount,page))
 local first,last=pageRange(#list,pageCount,page)
-local lines={reportHeader("ALL SPECIALISTS — A–Z",list,page,pageCount,"Alphabetical ownership and location index")}
+local lines={reportHeader(SpecialistFinder.SMT("ALL SPECIALISTS — A–Z","ALLE SPEZIALISTEN — A–Z"),list,page,pageCount,SpecialistFinder.SMT("Alphabetical ownership and location index","Alphabetische Bestands- und Standortübersicht"))}
 if first>last then
-lines[#lines+1]="No specialists on this page."
+lines[#lines+1]=SpecialistFinder.SMT("No specialists on this page.","Keine Spezialisten auf dieser Seite.")
 return table.concat(lines,"\n")
 end
-lines[#lines+1]="ENTRIES "..tostring(first).."–"..tostring(last).." OF "..tostring(#list)
+lines[#lines+1]=SpecialistFinder.SMT("ENTRIES ","EINTRÄGE ")..tostring(first).."–"..tostring(last)..SpecialistFinder.SMT(" OF "," VON ")..tostring(#list)
 lines[#lines+1]=""
 for i=first,last do
 local a=list[i]
 local jumpSlot=i-first+1
 local allSuffix=registerPageJump(jumpSlot,preferredJumpRef(a,"stored"),trimText(a.name))
-lines[#lines+1]=tostring(i)..". "..string.upper(trimText(a.name)).." — "..rarityText(a)..allSuffix
-lines[#lines+1]="OWNED "..tostring(a.total).." • AVAILABLE "..tostring(a.stored).." • EQUIPPED "..tostring(a.equipped).." • "..string.upper(bestUseText(a))
-for _,effectLine in ipairs(compactEffectLines(a,1,84)) do lines[#lines+1]=effectLine end
+lines[#lines+1]=tostring(i)..". "..string.upper(SpecialistFinder.SMDisplayName(a.guid,trimText(a.name))).." — "..SpecialistFinder.SMRarity(rarityText(a))..allSuffix
+lines[#lines+1]=SpecialistFinder.SMT("OWNED ","IM BESITZ ")..tostring(a.total)..SpecialistFinder.SMT(" • AVAILABLE "," • VERFÜGBAR ")..tostring(a.stored)..SpecialistFinder.SMT(" • EQUIPPED "," • EINGESETZT ")..tostring(a.equipped).." • "..string.upper(SpecialistFinder.SMTarget(bestUseText(a)))
+for _,effectLine in ipairs(compactEffectLines(a,1,84)) do lines[#lines+1]=SpecialistFinder.SMEffects(effectLine) end
 local stored=compactStoredLocationText(a,2)
 local equipped=compactEquippedLocationText(a,2)
-if stored~="" then lines[#lines+1]="STORED: "..stored end
-if equipped~="" then lines[#lines+1]="EQUIPPED: "..equipped end
+if stored~="" then lines[#lines+1]=SpecialistFinder.SMT("STORED: ","GELAGERT: ")..stored end
+if equipped~="" then lines[#lines+1]=SpecialistFinder.SMT("EQUIPPED: ","EINGESETZT: ")..equipped end
 lines[#lines+1]="----------------------------------------"
 lines[#lines+1]=""
 end
@@ -4237,17 +4554,17 @@ table.sort(list,function(a,b)
 if a.equipped~=b.equipped then return a.equipped>b.equipped end
 return trimText(a.name)<trimText(b.name)
 end)
-local lines={reportHeader("EQUIPPED SPECIALISTS",list,1,1,"Exact current placements")}
+local lines={reportHeader(SpecialistFinder.SMT("EQUIPPED SPECIALISTS","EINGESETZTE SPEZIALISTEN"),list,1,1,SpecialistFinder.SMT("Exact current placements","Genaue aktuelle Einsatzorte"))}
 for i,a in ipairs(list) do
 local equippedSuffix=registerPageJump(i,preferredJumpRef(a,"equipped"),trimText(a.name))
-lines[#lines+1]=tostring(i)..". "..trimText(a.name).." — "..rarityText(a).." • "..tostring(a.equipped).." equipped"..equippedSuffix
+lines[#lines+1]=tostring(i)..". "..SpecialistFinder.SMDisplayName(a.guid,trimText(a.name)).." — "..SpecialistFinder.SMRarity(rarityText(a)).." • "..tostring(a.equipped)..SpecialistFinder.SMT(" equipped"," eingesetzt")..equippedSuffix
 local equipped=compactEquippedLocationText(a,3)
 if equipped~="" then lines[#lines+1]=equipped end
 lines[#lines+1]=""
 end
 return table.concat(lines,"\n")
 end
-return "SPECIALIST FINDER\n\nNo report is available for this selection."
+return SpecialistFinder.SMT("SPECIALIST MANAGEMENT\n\nNo report is available for this selection.","SPECIALIST MANAGEMENT\n\nFür diese Auswahl ist kein Bericht verfügbar.")
 end
 local AUTO_RESUME_STORYLINES = {
 best = 2008628301,
@@ -4287,9 +4604,9 @@ self.MenuWasVisible=false
 self.ReportPopupSeenForCycle=false
 local message
 if mode=="changes" then
-message="WHAT CHANGED SINCE LAST SCAN\n\nScanning the current province again...\n\nThis paper will close automatically while the scan runs.\nThe change report will reopen when the comparison is complete."
+message=SpecialistFinder.SMT("WHAT CHANGED SINCE LAST SCAN\n\nScanning the current province again...\n\nThis paper will close automatically while the scan runs.\nThe change report will reopen when the comparison is complete.","ÄNDERUNGEN SEIT DEM LETZTEN SCAN\n\nDie aktuelle Provinz wird erneut gescannt...\n\nDieses Pergament schließt sich während des Scans automatisch.\nDer Änderungsbericht öffnet sich nach Abschluss des Vergleichs erneut.")
 else
-message="SPECIALIST FINDER\n\nNo current specialist scan was found.\n\nStarting specialist scan automatically...\n\nThis paper will close automatically so the warehouse scan can run.\nThe requested report will reopen when the scan is complete."
+message=SpecialistFinder.SMT("SPECIALIST MANAGEMENT\n\nNo current specialist scan was found.\n\nStarting specialist scan automatically...\n\nThis paper will close automatically so the warehouse scan can run.\nThe requested report will reopen when the scan is complete.","SPECIALIST MANAGEMENT\n\nKein aktueller Spezialistenscan gefunden.\n\nDer Spezialistenscan startet automatisch...\n\nDieses Pergament schließt sich automatisch, damit der Kontor-Scan ausgeführt werden kann.\nDer angeforderte Bericht öffnet sich nach Abschluss des Scans erneut.")
 end
 local writeOk,writeErr=pcall(function() if content then content.Text=message end end)
 self.AutoScanCloseBeforeStartTicks=2
@@ -4336,26 +4653,6 @@ self.AutoScanResumeInProgress=false
 self.AutoScanResumeMarker=nil
 self.AutoScanResumeMode=nil
 return ok
-end
-function SpecialistFinder:ForceRescan()
-if self.WarehouseProbe and self.WarehouseProbe.active then
-log("FORCE RESCAN shortcut ignored | integrated scan already active")
-return true
-end
-local session=tostring(currentSession() or "")
-self.ScanReadySession=nil
-self.ScanReadySessions[session]=nil
-self.StoredCache[session]=nil
-self.AutoScanResumeMarker=nil
-self.AutoScanResumeMode=nil
-self.AutoScanResumeTicks=0
-self.AutoScanResumeInProgress=false
-self.AutoScanCloseBeforeStartTicks=nil
-self.AutoScanStartAfterCloseTicks=nil
-self.StoredRows={}
-self.Cache[session]=nil
-log("FORCE RESCAN REQUEST | shortcut=Ctrl+Alt+R | session="..tostring(session).." | cachedScanCleared=true")
-return self:RunGeneral()
 end
 function SpecialistFinder:Open()
 if self.WarehouseProbe and self.WarehouseProbe.active then
@@ -4491,6 +4788,7 @@ self.ReportPopupSeenForCycle=false
 self.ReportMenuReopenedForCycle=false
 self.NarrativeSeenSinceLastReportSelection=false
 self.PopupWasVisible=false
+self.SpecialistReportOpen=false
 self.MenuReturnPendingTicks=0
 self.ReturnRequestProbeTicks=0
 self.ReturnRequestArmed=false
@@ -4514,7 +4812,7 @@ self.GovernorPrimaryPending=nil
 self:TriggerGovernorRequestPrimary()
 end
 end
-if self.ReturnRequestProbeTicks and self.ReturnRequestProbeTicks>0 and not self.ReturnRequestArmed then
+if false and self.ReturnRequestProbeTicks and self.ReturnRequestProbeTicks>0 and not self.ReturnRequestArmed then -- Test6 return helpers disabled
 local remaining=self.ReturnRequestProbeTicks
 local attempt=121-remaining
 if self.PendingReportJump then
@@ -4541,15 +4839,33 @@ log("DEDICATED RETURN REQUEST JUMP DISMISS WINDOW ENDED | success=false | storyl
 end
 end
 else
-local ok,res=self:TriggerLatestGovernorRequestPrimary("REPORT_OPEN_RETRY_"..tostring(attempt))
+-- v1.0.2: Keep the return helper dormant while TextPopup is open.
+-- Activating its EventPrimary behind the parchment creates NarrativeSequence,
+-- which can capture Ctrl+Alt+1..9 before CShortcutManager reaches JumpReport1..9.
+-- Once the parchment closes normally, activate the same helper so the native
+-- return-to-menu flow is preserved. During a report jump, the existing branch
+-- above dismisses the dormant request via EventSecondary before navigating.
+local reportScene=ui and ui.Scenes and ui.Scenes.TextPopup or nil
+local reportData=reportScene and read(reportScene,"SceneData") or nil
+local reportContent=reportData and read(reportData,"Content") or nil
+local reportStillOpen=reportContent~=nil
+if reportStillOpen then
+-- Do not consume the probe window while the report is visible. The helper
+-- notification may exist, but it must not be activated behind the parchment.
+if remaining==120 or remaining==60 or remaining==1 then
+log("DEDICATED RETURN REQUEST DORMANT | reportStillOpen=true | shortcutCaptureProtection=true | probeTicksPreserved="..tostring(remaining))
+end
+else
+local ok,res=self:TriggerLatestGovernorRequestPrimary("REPORT_CLOSED_RETURN_"..tostring(attempt))
 if ok then
 self.ReturnRequestProbeTicks=0
 self.ReturnRequestArmed=true
-log("DEDICATED RETURN REQUEST ARMED | success=true | reportStillOpen=true | attempt="..tostring(attempt))
+log("DEDICATED RETURN REQUEST ARMED AFTER PAPER CLOSE | success=true | reportStillOpen=false | attempt="..tostring(attempt).." | shortcutCaptureProtection=true")
 else
 self.ReturnRequestProbeTicks=remaining-1
 if self.ReturnRequestProbeTicks==0 then
-log("DEDICATED RETURN REQUEST PROBE WINDOW ENDED | success=false | reportStillOpen=true | storyline="..tostring(self.ActiveReturnStorylineGUID).." | helperStillSingle=true")
+log("DEDICATED RETURN REQUEST PROBE WINDOW ENDED | success=false | reportStillOpen=false | storyline="..tostring(self.ActiveReturnStorylineGUID).." | helperStillSingle=true")
+end
 end
 end
 end
@@ -4592,6 +4908,7 @@ local scene=ui and ui.Scenes and ui.Scenes.TextPopup or nil
 local sd=scene and read(scene,"SceneData") or nil
 local content=sd and read(sd,"Content") or nil
 local popupActive=content~=nil
+if not popupActive and self.SpecialistReportOpen==true then self.SpecialistReportOpen=false end
 local narrativeJustClosed = self.NarrativeWasActive == true and not narrativeActive
 self.NarrativeWasActive = narrativeActive
 if narrativeJustClosed then
@@ -4626,6 +4943,7 @@ elseif self.NativeProbeLastPage then
 self.NativeProbeLastPage=nil
 end
 if FILTER_MARKERS[text] and (self.PendingMarker~=text or self.WriteDone or self.NarrativeSeenSinceLastReportSelection) then
+self.SpecialistReportOpen=true
 local fromMenu=self.NarrativeSeenSinceLastReportSelection==true
 local previousMarker=self.PendingMarker
 local currentMode=markerMode(text)
@@ -4728,8 +5046,9 @@ local immediateMarker=self.PendingMarker
 local bok,report=pcall(buildReport,immediateMarker)
 if not bok then
 log("REPORT BUILD FAILED | marker="..tostring(immediateMarker).." | mode="..markerMode(immediateMarker).." | error="..tostring(report))
-report="SPECIALIST FINDER\n\nReport could not be rendered.\n\nPlease close this parchment and try again."
+report=SpecialistFinder.SMT("SPECIALIST MANAGEMENT\n\nReport could not be rendered.\n\nPlease close this parchment and try again.","SPECIALIST MANAGEMENT\n\nDer Bericht konnte nicht erstellt werden.\n\nBitte schließe dieses Pergament und versuche es erneut.")
 end
+report=decorateSpecialistReport(report)
 local ok,err=pcall(function() content.Text=report end)
 self.WriteDone=true
 log("REAL REPORT WRITE IMMEDIATE | marker="..tostring(immediateMarker).." | mode="..markerMode(immediateMarker)
@@ -4738,39 +5057,14 @@ log("REAL REPORT WRITE IMMEDIATE | marker="..tostring(immediateMarker).." | mode
 .." | success="..tostring(ok)
 .." | chars="..tostring(type(report)=="string" and #report or 0)
 .." | error="..tostring(err or ""))
-if selectedMode=="empty_slots" or selectedMode=="changes" then
+-- Test7: every report is direct mode. Do not start a GovernorDecision behind the
+-- parchment. Ctrl+Alt+0 is the one universal return path and Ctrl+Alt+1..9 jump
+-- directly to their targets. This prevents stacked Governor/Decision icons.
 self.ReportMenuReopenedForCycle=true
 self.ReturnRequestProbeTicks=0
 self.ReturnRequestArmed=false
-if selectedMode=="empty_slots" then
-log("EMPTY SLOT REPORT DIRECT MODE | noReturnHelper=true | reason=numbered entries jump directly to host; Ctrl+Alt+I reopens cached menu")
-else
-log("CHANGES REPORT DIRECT MODE | noReturnHelper=true | reason=all What Changed jumps use direct current-location navigation; warehouse targets still use native search/highlight after arrival; no hidden NarrativeSequence; Ctrl+Alt+I reopens cached menu")
-end
-elseif not self.ReportMenuReopenedForCycle then
-self.ReturnStorylineIndex=((self.ReturnStorylineIndex or 0)%#RETURN_STORYLINE_GUIDS)+1
-local returnGuid=RETURN_STORYLINE_GUIDS[self.ReturnStorylineIndex]
-self.ActiveReturnStorylineGUID=returnGuid
-self.ReturnRequestArmed=false
-local menuOk,menuErr=pcall(function()
-GovernorDecision:CheatStartGovernorDecisionForCurrentPlayerNet(returnGuid)
-end)
-self.ReportMenuReopenedForCycle=true
-self.MenuSessionActive=true
-self.MenuWasVisible=true
-self.ReportPopupSeenForCycle=true
-if menuOk then self.ReturnRequestProbeTicks=120 end
-log("DEDICATED RETURN REQUEST CREATED BEHIND REPORT | success="..tostring(menuOk)
-.." | storyline="..tostring(returnGuid)
-.." | rotationIndex="..tostring(self.ReturnStorylineIndex)
-.." | poolSize="..tostring(#RETURN_STORYLINE_GUIDS)
-.." | freshPool=true"
-.." | helperTimeoutMs=1000"
-.." | probeTicks=120"
-.." | oncePerReportCycle=true"
-.." | immediateWrite=true"
-.." | error="..tostring(menuErr or ""))
-end
+self.ActiveReturnStorylineGUID=nil
+log("REPORT UNIVERSAL DIRECT MODE | marker="..tostring(immediateMarker).." | noReturnHelper=true | Ctrl+Alt+0=close-and-return | Ctrl+Alt+1-9=direct-jump")
 end
 
 elseif self.PendingMarker and not self.WriteDone then
@@ -4779,8 +5073,9 @@ if elapsed>=1 then
 local bok,report=pcall(buildReport,self.PendingMarker)
 if not bok then
 log("REPORT BUILD FAILED | marker="..tostring(self.PendingMarker).." | mode="..markerMode(self.PendingMarker).." | error="..tostring(report))
-report="SPECIALIST FINDER\n\nReport could not be rendered.\n\nPlease close this parchment and try again."
+report=SpecialistFinder.SMT("SPECIALIST MANAGEMENT\n\nReport could not be rendered.\n\nPlease close this parchment and try again.","SPECIALIST MANAGEMENT\n\nDer Bericht konnte nicht erstellt werden.\n\nBitte schließe dieses Pergament und versuche es erneut.")
 end
+report=decorateSpecialistReport(report)
 local ok,err=pcall(function() content.Text=report end)
 self.WriteDone=true
 log("REAL REPORT WRITE | marker="..tostring(self.PendingMarker).." | mode="..markerMode(self.PendingMarker)
@@ -4789,29 +5084,11 @@ log("REAL REPORT WRITE | marker="..tostring(self.PendingMarker).." | mode="..mar
 .." | success="..tostring(ok)
 .." | chars="..tostring(type(report)=="string" and #report or 0)
 .." | error="..tostring(err or ""))
-if not self.ReportMenuReopenedForCycle then
-self.ReturnStorylineIndex=((self.ReturnStorylineIndex or 0)%#RETURN_STORYLINE_GUIDS)+1
-local returnGuid=RETURN_STORYLINE_GUIDS[self.ReturnStorylineIndex]
-self.ActiveReturnStorylineGUID=returnGuid
-self.ReturnRequestArmed=false
-local menuOk,menuErr=pcall(function()
-GovernorDecision:CheatStartGovernorDecisionForCurrentPlayerNet(returnGuid)
-end)
 self.ReportMenuReopenedForCycle=true
-self.MenuSessionActive=true
-self.MenuWasVisible=true
-self.ReportPopupSeenForCycle=true
-if menuOk then self.ReturnRequestProbeTicks=120 end
-log("DEDICATED RETURN REQUEST CREATED BEHIND REPORT | success="..tostring(menuOk)
-.." | storyline="..tostring(returnGuid)
-.." | rotationIndex="..tostring(self.ReturnStorylineIndex)
-.." | poolSize="..tostring(#RETURN_STORYLINE_GUIDS)
-.." | freshPool=true"
-.." | helperTimeoutMs=1000"
-.." | probeTicks=120"
-.." | oncePerReportCycle=true"
-.." | error="..tostring(menuErr or ""))
-end
+self.ReturnRequestProbeTicks=0
+self.ReturnRequestArmed=false
+self.ActiveReturnStorylineGUID=nil
+log("REPORT UNIVERSAL DIRECT MODE DELAYED WRITE | marker="..tostring(self.PendingMarker).." | noReturnHelper=true | Ctrl+Alt+0=close-and-return")
 end
 end
 end
@@ -4894,7 +5171,7 @@ end
 local RelevantSpecialistsEmbedded=nil
 do
 local Diagnostic = {}
-local PREFIX = "[Relevant Specialists Release Candidate 0.1.26] "
+local PREFIX = "[Relevant Specialists Patch 2 1.1.0] "
 local HOST_RADIUS_FALLBACK = { ["87351"]=24.0, ["87350"]=24.0, ["31032"]=36.0, ["31050"]=36.0, ["89911"]=24.0, ["31031"]=36.0 }
 local RAW_TARGET_GUIDS = {
 [41350] = {3142}, -- Specialist Rival 01 Dorian
@@ -5253,6 +5530,52 @@ local RAW_TARGET_GUIDS = {
 [147976] = {3087,3141,3142,3145,6414,6471,6472,6475,6514}, -- Specialist Volcano Storyline E NeedReward Idols
 [147978] = {3087,3141,3142,3145,6414,6471,6472,6475,6514}, -- Specialist Volcano Storyline E NeedReward Boardgames
 [149292] = {3087,3141,3142,3145,6414,6471,6472,6475,6514}, -- Specialist HallOfFame Nanny
+[156688] = {159705,159706}, -- Patch 2 ordinary radius effect
+[156690] = {50231}, -- Patch 2 ordinary radius effect
+[156696] = {51905}, -- Patch 2 ordinary radius effect
+[156698] = {31046}, -- Patch 2 ordinary radius effect
+[156701] = {51929}, -- Patch 2 ordinary radius effect
+[156704] = {159710}, -- Patch 2 ordinary radius effect
+[156706] = {5616}, -- Patch 2 ordinary radius effect
+[156710] = {50601}, -- Patch 2 ordinary radius effect
+[156712] = {31046}, -- Patch 2 ordinary radius effect
+[156714] = {5616}, -- Patch 2 ordinary radius effect
+[156717] = {50280,144815}, -- Patch 2 ordinary radius effect
+[156720] = {31046}, -- Patch 2 ordinary radius effect
+[156729] = {53358}, -- Patch 2 ordinary radius effect
+[159046] = {82157}, -- Patch 2 ordinary radius effect
+[159050] = {82498}, -- Patch 2 ordinary radius effect
+[159054] = {31046}, -- Patch 2 ordinary radius effect
+[160048] = {50232}, -- Heroic local radius effect only
+[160051] = {5851}, -- Heroic local radius effect only
+[160054] = {50601}, -- Heroic local radius effect only
+[160057] = {5615}, -- Heroic local radius effect only
+[160060] = {42602}, -- Heroic local radius effect only
+[160063] = {43099}, -- Heroic local radius effect only
+[160066] = {3201}, -- Heroic local radius effect only
+[160072] = {50293}, -- Heroic local radius effect only
+[160075] = {50614}, -- Heroic local radius effect only
+[160078] = {3192}, -- Heroic local radius effect only
+[160081] = {144814}, -- Heroic local radius effect only
+[160084] = {31046}, -- Heroic local radius effect only
+[160087] = {42605}, -- Heroic local radius effect only
+[160090] = {70714}, -- Heroic local radius effect only
+[160093] = {3081}, -- Heroic local radius effect only
+[160488] = {29318,140478}, -- Heroic local radius effect only
+[160491] = {43102}, -- Heroic local radius effect only
+[160494] = {38552}, -- Heroic local radius effect only
+[160500] = {3202}, -- Heroic local radius effect only
+[160507] = {6728}, -- Heroic local radius effect only
+[160510] = {31659}, -- Heroic local radius effect only
+[160513] = {3191}, -- Heroic local radius effect only
+[160516] = {81446}, -- Heroic local radius effect only
+[160519] = {3528}, -- Heroic local radius effect only
+[160522] = {50235}, -- Heroic local radius effect only
+[160525] = {81911}, -- Heroic local radius effect only
+[160528] = {50605,50608}, -- Heroic local radius effect only
+[160531] = {145229,145230}, -- Heroic local radius effect only
+[160534] = {3528}, -- Heroic local radius effect only
+[180653] = {31046}, -- Patch 2 ordinary radius effect
 }
 local function targetSetForGuid(itemGuidValue)
 local list = RAW_TARGET_GUIDS[itemGuidValue] or {}
@@ -5311,7 +5634,11 @@ return (tab and read(tab, "ItemsSelectionPopupData")) or (data and read(data, "I
 end
 local function arrayHelper(arrayValue)
 if arrayValue == nil then return nil end
-local helperKey = string.match(text(arrayValue), "^(PhoenixArray<[^>]+>)")
+local valueName=text(arrayValue)
+local helperKey = string.match(valueName, "^(PhoenixArray<[^>]+>)")
+if helperKey == nil and string.match(valueName,"^PhoenixAnyArray") then
+helperKey="PhoenixAnyArray"
+end
 if helperKey == nil then return nil end
 local haloRoot = rawget(_G, "halo")
 local helper = type(haloRoot) == "table" and haloRoot[helperKey] or nil
@@ -5334,9 +5661,20 @@ local function pickerCandidate(label, popup, data, sceneObject)
 if not popup then return nil end
 local items = read(popup, "ItemsData")
 local array = items and read(items, "ArrayData") or nil
+local adapter="v1.0.8 ItemsData.ArrayData"
+-- Patch 2 Governor Villa: StoragePopupData moved to OMGovernorVillaData and
+-- exposes the specialist rows directly as GoodsItemsData (PhoenixAnyArray).
+if array==nil then
+local goodsItems=read(popup,"GoodsItemsData")
+if goodsItems~=nil then
+items=goodsItems
+array=goodsItems
+adapter="Patch2 StoragePopupData.GoodsItemsData"
+end
+end
 local count = arraySize(array) or 0
 local isVisible = read(popup, "IsVisible")
-return {label=label, popup=popup, data=data, scene=sceneObject, items=items, array=array, count=count, isVisible=isVisible}
+return {label=label, popup=popup, data=data, scene=sceneObject, items=items, array=array, count=count, isVisible=isVisible,adapter=adapter}
 end
 local function pickerPair()
 local gp, gd, gs = guestHousePopup()
@@ -5350,6 +5688,110 @@ local g, v = pickerPair()
 if g and g.count > 0 and g.isVisible == true then return g end
 if v and v.count > 0 and v.isVisible == true then return v end
 return nil
+end
+
+-- Patch 2 diagnostic only: inspect explicit known/likely Governor Villa picker paths.
+-- Read-only: no writes, no selection/equip/inventory mutation.
+local function patch2PopupDiagnostic()
+local s=scene("OMGovernorVilla")
+local sd=s and read(s,"SceneData") or nil
+local data=sd and read(sd,"OMGovernorVillaData") or nil
+local tab=data and read(data,"VillaTab") or nil
+local selection=rawget(_G,"Selection")
+local selected=selection and (read(selection,"Object") or read(selection,"PickedObject")) or nil
+local function probeOne(label,obj)
+if obj==nil then
+log("PATCH2 PICKER PROBE | path="..label.." | present=false")
+return
+end
+local vis=read(obj,"IsVisible")
+local items=read(obj,"ItemsData") or read(obj,"ItemData") or read(obj,"Items") or read(obj,"Candidates") or read(obj,"Entries")
+local arr=items and (read(items,"ArrayData") or read(items,"Array") or read(items,"Items") or read(items,"Candidates") or read(items,"Entries")) or nil
+local directArr=read(obj,"ArrayData") or read(obj,"Array") or read(obj,"Candidates") or read(obj,"Entries")
+if arr==nil then arr=directArr end
+local count=arraySize(arr) or 0
+log("PATCH2 PICKER PROBE | path="..label
+.." | present=true | object="..text(obj)
+.." | IsVisible="..tostring(vis)
+.." | items="..text(items)
+.." | array="..text(arr)
+.." | count="..tostring(count))
+end
+log("========== PATCH2 GOVERNOR VILLA PICKER PROBE START ==========")
+log("PATCH2 PICKER CONTEXT | scene="..text(s).." | sceneData="..text(sd).." | governorVillaData="..text(data).." | villaTab="..text(tab)
+.." | selectedObject="..text(selected)
+.." | selectedGUID="..text(selected and (read(selected,"GUID") or read(selected,"Guid")) or nil)
+.." | selectedID="..text(selected and read(selected,"ID") or nil))
+local paths={
+ {"tab.ItemsSelectionPopupData", tab and read(tab,"ItemsSelectionPopupData")},
+ {"tab.ItemSelectionPopupData", tab and read(tab,"ItemSelectionPopupData")},
+ {"tab.ItemPopup", tab and read(tab,"ItemPopup")},
+ {"tab.ItemsPopupData", tab and read(tab,"ItemsPopupData")},
+ {"tab.SpecialistSelectionPopupData", tab and read(tab,"SpecialistSelectionPopupData")},
+ {"tab.SpecialistsSelectionPopupData", tab and read(tab,"SpecialistsSelectionPopupData")},
+ {"tab.SpecialistPopupData", tab and read(tab,"SpecialistPopupData")},
+ {"tab.SpecialistPopup", tab and read(tab,"SpecialistPopup")},
+ {"tab.SocketSelectionPopupData", tab and read(tab,"SocketSelectionPopupData")},
+ {"tab.ItemSelection", tab and read(tab,"ItemSelection")},
+ {"tab.SpecialistSelection", tab and read(tab,"SpecialistSelection")},
+ {"data.ItemsSelectionPopupData", data and read(data,"ItemsSelectionPopupData")},
+ {"data.ItemSelectionPopupData", data and read(data,"ItemSelectionPopupData")},
+ {"data.ItemPopup", data and read(data,"ItemPopup")},
+ {"data.ItemsPopupData", data and read(data,"ItemsPopupData")},
+ {"data.SpecialistSelectionPopupData", data and read(data,"SpecialistSelectionPopupData")},
+ {"data.SpecialistsSelectionPopupData", data and read(data,"SpecialistsSelectionPopupData")},
+ {"data.SpecialistPopupData", data and read(data,"SpecialistPopupData")},
+ {"data.SpecialistPopup", data and read(data,"SpecialistPopup")},
+ {"data.SocketSelectionPopupData", data and read(data,"SocketSelectionPopupData")},
+ {"data.ItemSelection", data and read(data,"ItemSelection")},
+ {"data.SpecialistSelection", data and read(data,"SpecialistSelection")},
+}
+for _,entry in ipairs(paths) do probeOne(entry[1],entry[2]) end
+
+-- Test13: enumerate the actual Patch 2 StoragePopupData properties using the
+-- existing safe type-info reader already present in Specialist Management.
+local popup=data and read(data,"ItemsSelectionPopupData") or nil
+if popup then
+local info=rawTypeInfo(popup)
+log("PATCH2 STORAGE POPUP TYPEINFO | available="..tostring(type(info)=="string")
+.." | length="..tostring(type(info)=="string" and #info or 0))
+if type(info)=="string" then
+local names,seen={},{}
+for name in string.gmatch(info, '"([%w_]+)"%s*:%s*%{"Alias"') do
+if not seen[name] then
+seen[name]=true
+names[#names+1]=name
+end
+end
+table.sort(names)
+log("PATCH2 STORAGE POPUP PROPERTIES | count="..tostring(#names)
+.." | names="..table.concat(names,","))
+for _,name in ipairs(names) do
+local value=read(popup,name)
+if value~=nil then
+local scalarType=type(value)
+local nestedInfo=(scalarType=="userdata" or scalarType=="table") and rawTypeInfo(value) or nil
+local array=nil
+local count=nil
+if scalarType=="userdata" or scalarType=="table" then
+array=read(value,"ArrayData") or read(value,"Array") or read(value,"ItemsData") or read(value,"Items")
+if array~=nil then count=arraySize(array) end
+end
+log("PATCH2 STORAGE POPUP PROPERTY"
+.." | name="..tostring(name)
+.." | type="..tostring(scalarType)
+.." | value="..text(value)
+.." | nestedTypeInfo="..tostring(type(nestedInfo)=="string")
+.." | nestedTypeInfoLength="..tostring(type(nestedInfo)=="string" and #nestedInfo or 0)
+.." | candidateArray="..text(array)
+.." | candidateCount="..tostring(count))
+end
+end
+end
+end
+
+log("========== PATCH2 GOVERNOR VILLA PICKER PROBE END ==========")
+return true
 end
 local function anyPicker(label)
 local g, v = pickerPair()
@@ -6067,13 +6509,17 @@ function Diagnostic:Load()
 self._filterState=nil
 self._pickerWasOpen=false
 self._lastSelectedObjectID=""
-log("Load completed | shortcut=Ctrl+Alt+I UNIFIED | target=UI-only Relevant Here disable filter with GUID-following row maintenance and true popup-session reset via ItemSelectionPopupData.IsVisible | first press disables mapped irrelevant candidate buttons; Anno rebuild/reorder is re-disabled by GUID while this same picker stays open; second press force-enables rows; closing the picker automatically restores those rows and clears filter state so the next specialist selection starts Show All | v0.1.26: release candidate using complete assets.xml-derived target mapping and host-specific radius fix (Guest House/Officium 24, Governor Villa 36) while retaining complete specialist target GUID mapping | 356 radius specialists mapped | no text guessing | no reflection | no renderer probing | no hover forcing | no selection/equip/inventory mutation")
+log("Load completed | shortcut=Ctrl+Alt+I UNIFIED | target=UI-only Relevant Here disable filter with GUID-following row maintenance and true popup-session reset via ItemSelectionPopupData.IsVisible | first press disables mapped irrelevant candidate buttons; Anno rebuild/reorder is re-disabled by GUID while this same picker stays open; second press force-enables rows; closing the picker automatically restores those rows and clears filter state so the next specialist selection starts Show All | v1.0.8 behavior restored exactly; Patch 2 target table retained | Guest House/Officium 24, Governor Villa 36 | 402 ordinary radius specialists mapped | no text guessing | no reflection | no renderer probing | no hover forcing | no selection/equip/inventory mutation")
 end
 function Diagnostic:IsPickerOpen()
 return activePicker()~=nil
 end
+function Diagnostic:Patch2GovernorVillaProbe()
+log("PATCH2 PROBE DISPATCH | scope=RelevantSpecialistsEmbedded | localSceneHelper=true | localPickerHelpers=true")
+return patch2PopupDiagnostic()
+end
 function Diagnostic:Capture()
-log("SHORTCUT REACHED | key=Ctrl+Alt+I | build=0.1.26-release-candidate")
+log("SHORTCUT REACHED | key=Ctrl+Alt+I | build=v1.0.8-restored-test8")
 local picker=activePicker()
 if not picker then
 if self._filterState then
@@ -6110,7 +6556,7 @@ return true
 end
 local hoverGuid=infoTipGuid()
 local hoverIndex,_=candidateByGuid(picker,hoverGuid)
-log("FILTER SNAPSHOT | picker="..picker.label
+log("FILTER SNAPSHOT | picker="..picker.label.." | adapter="..tostring(picker.adapter or "unknown")
 .." | pickerVisible="..tostring(picker.isVisible)
 .." | itemCount="..tostring(picker.count)
 .." | hoveredGuid="..tostring(hoverGuid)
@@ -6214,10 +6660,10 @@ and type(RelevantSpecialistsEmbedded.IsPickerOpen)=="function" then
 pickerOpen=RelevantSpecialistsEmbedded:IsPickerOpen()==true
 end
 if pickerOpen then
-system.log("[Specialist Management 1.0.0] Ctrl+Alt+I | visible picker -> Relevant Specialists")
+system.log("[Specialist Management 1.1.0] Ctrl+Alt+I | visible picker -> Relevant Specialists | Patch2 GoodsItemsData adapter active")
 return RelevantSpecialistsEmbedded:Capture()
 end
-system.log("[Specialist Management 1.0.0] Ctrl+Alt+I | no visible picker -> Specialist Management menu")
+system.log("[Specialist Management 1.1.0] Ctrl+Alt+I | no visible picker -> Specialist Management menu")
 self:ClearWarehouseSearch("Ctrl+Alt+I start / protect full specialist scan")
 return _SMFinderOpen(self)
 end
@@ -6226,7 +6672,7 @@ local _SMFinderLoad=SpecialistFinder.Load
 function SpecialistFinder:Load()
 RelevantSpecialistsEmbedded:Load()
 _SMFinderLoad(self)
-system.log("[Specialist Management 1.0.0] Load COMPLETE | release | Ctrl+Alt+I unified only | Selector v0.1.26 + Finder v0.14.13")
+system.log("[Specialist Management 1.1.0] Load complete | Patch 2 compatibility | RELEASE | stable Patch 2 behavior | Ctrl+Alt+0 report return | Heroic metadata=30 | v1.0.8 Relevant Specialists algorithm preserved | adapter supports StoragePopupData.GoodsItemsData PhoenixAnyArray | visible Ctrl+Alt+0 banner on every parchment | universal Ctrl+Alt+0 return + no hidden return helpers | Heroic metadata=30 | ordinaryRadiusMappings=402")
 end
 
 local _SMFinderTick=SpecialistFinder.Tick
