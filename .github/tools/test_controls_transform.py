@@ -36,7 +36,21 @@ class ControlsMigrationTests(unittest.TestCase):
         self.assertEqual(items[9].findtext("Command"), build.shared_command(0))
 
     def test_specialist_assets_remove_private_number_rows_and_make_open_configurable(self):
-        source = '''<ModOps>\n  <ModOp Type="add" GUID="2001271" Path="/Values/ShortcutConfig/InputBindings">\n    <Item><Command>SpecialistFinderRC:Open()</Command><Identifier>SpecialistFinderStatisticsFirstV020</Identifier><InputTypes><Modern><KeyType>Control;Alt;I</KeyType></Modern></InputTypes></Item>\n    <Item><Command>SpecialistFinderRC:JumpReport1()</Command><Identifier>SpecialistManagementJumpReport1V057</Identifier></Item>\n    <Item><Command>SpecialistFinderRC:BackToMenu()</Command><Identifier>SpecialistManagementBackToMenuV110Test6</Identifier></Item>\n  </ModOp>\n  <Asset><Template>TextPopup</Template></Asset>\n</ModOps>'''
+        rows = [
+            '<Item><Command>SpecialistFinderRC:Open()</Command><Identifier>SpecialistFinderStatisticsFirstV020</Identifier><InputTypes><Modern><KeyType>Control;Alt;I</KeyType></Modern></InputTypes></Item>'
+        ]
+        for i in range(1, 10):
+            rows.append(
+                f'<Item><Command>SpecialistFinderRC:JumpReport{i}()</Command><Identifier>SpecialistManagementJumpReport{i}V057</Identifier></Item>'
+            )
+        rows.append(
+            '<Item><Command>SpecialistFinderRC:BackToMenu()</Command><Identifier>SpecialistManagementBackToMenuV110Test6</Identifier></Item>'
+        )
+        source = (
+            '<ModOps>\n  <ModOp Type="add" GUID="2001271" Path="/Values/ShortcutConfig/InputBindings">\n    '
+            + '\n    '.join(rows)
+            + '\n  </ModOp>\n  <Asset><Template>TextPopup</Template></Asset>\n</ModOps>'
+        )
         patched = build.patch_assets_xml(source)
         root = ET.fromstring(patched)
         shortcut_items = []
