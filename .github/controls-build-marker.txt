@@ -1,0 +1,1 @@
+Controls candidate build trigger after full-history checkout fix.
