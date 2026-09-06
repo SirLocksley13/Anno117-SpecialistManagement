@@ -1,0 +1,55 @@
+name: Build Specialist Controls Candidate
+
+on:
+  push:
+    branches:
+      - test-controls-v1.1.1-controls1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout exact branch source
+        uses: actions/checkout@v4
+
+      - name: Verify protected baseline commit ancestry
+        shell: bash
+        run: |
+          git merge-base --is-ancestor b0f91f6dc25482684822fe7ad54667a045121b0a HEAD
+          python - <<'PY'
+          import json
+          d=json.load(open('modinfo.json',encoding='utf-8'))
+          assert d['ModID']=='specialist-management-v0546', d
+          assert d['Version']=='1.1.0', d
+          print('Protected v1.1.0 baseline verified')
+          PY
+
+      - name: Run controls migration tests
+        run: python .github/tools/test_controls_transform.py
+
+      - name: Build controls-only candidate and ready-to-copy test job
+        run: python .github/tools/build_controls_candidate.py --repo . --out dist
+
+      - name: Verify package checksums and ZIP integrity
+        shell: bash
+        run: |
+          cat dist/SHA256SUMS.txt
+          python -m zipfile -t dist/Specialist_Management_v1.1.1-test-controls1.zip
+          python -m zipfile -t dist/Anno117_Test_Job.zip
+          python -m zipfile -t dist/Specialist_Management_v1.1.1-test-controls1_Package.zip
+
+      - name: Upload downloadable package
+        uses: actions/upload-artifact@v4
+        with:
+          name: Specialist_Management_v1.1.1-test-controls1_Package
+          path: |
+            dist/Specialist_Management_v1.1.1-test-controls1_Package.zip
+            dist/Specialist_Management_v1.1.1-test-controls1.zip
+            dist/Anno117_Test_Job.zip
+            dist/SHA256SUMS.txt
+          if-no-files-found: error
+          retention-days: 30
