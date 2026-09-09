@@ -1,0 +1,152 @@
+diff --git a/README.md b/README.md
+index 81703fb..b7d4480 100644
+--- a/README.md
++++ b/README.md
+@@ -19,22 +19,26 @@ Reports include:
+ - Scan Again / What Changed?
+ - Ship Recommendations
+ - Empire Overview
++- Potential Duplicate Specialists
+ - All Specialists
+ 
+ The mod is **read-only**. It does not equip, unequip, move, transfer, create, or delete specialists.
+ 
+ ## Controls
+ 
++All Specialist Management controls are configurable in **Settings → Controls**. The values below are defaults.
++
+ - **Ctrl+Alt+I**
+   - specialist picker open: toggle **Relevant Specialists**
+-  - Guest House / Officium / Governor Villa open but picker closed: arm/disarm **Relevant Specialists** for the next specialist slot you open
+-  - outside a supported specialist host: open **Specialist Management**
++  - no specialist picker visible: open **Specialist Management**
+ - **Ctrl+Alt+1 ... 9** — jump to the corresponding numbered report entry when supported
+ - **Ctrl+Alt+0** — from a Specialist Management parchment, close it and return to the Specialist Management menu
+ 
++The numbered entry controls and Back control use the shared **SirLocksley Parchment Controls Core**. Specialist Management responds only when its own parchment is the active matching TextPopup.
++
+ ## Relevant Specialists
+ 
+-With a specialist picker open, Ctrl+Alt+I leaves relevant candidates enabled and disables mapped candidates whose target buildings are not within the selected host's effect radius. If the supported host screen is open but no slot picker is visible yet, Ctrl+Alt+I arms the filter and applies it automatically when the next specialist slot picker opens.
++With a specialist picker open, Ctrl+Alt+I leaves relevant candidates enabled and disables mapped candidates whose target buildings are not within the selected host's effect radius. Open the specialist slot selection first, then use Ctrl+Alt+I to toggle Relevant Specialists. If no picker is visible, Ctrl+Alt+I opens Specialist Management.
+ 
+ Host radii:
+ - Guest House / Officium: 24
+@@ -42,27 +46,43 @@ Host radii:
+ 
+ The current target table contains **402 ordinary radius-specialist mappings** updated from Patch 2.0 game data. Island-wide Heroic effects remain separate from this local-radius filter. Unknown or newly added specialists stay enabled rather than being incorrectly disabled.
+ 
++## Potential Duplicate Specialists
++
++The duplicate report flags the same specialist GUID when it is equipped more than once on the same island. Ships are excluded from duplicate-island detection. Findings are deliberately called **potential** duplicates because repeated placement is not automatically wasteful in every situation.
++
++The duplicate report uses the actual number of placements to choose a native 1–6 page parchment **before it opens**:
++- 0–9 placements: 1 page
++- 10–18: 2 pages
++- 19–27: 3 pages
++- 28–36: 4 pages
++- 37–45: 5 pages
++- 46–54: 6 pages
++
++A one-page result therefore has no unnecessary forward-page arrow. The report never closes and reopens itself to resize the parchment.
++
+ ## Provinces
+ 
+ Latium and Albion are scanned and cached separately. Most reports concern the current province. **Empire Overview** summarizes both province caches.
+ 
+ ## Languages
+ 
+-Version 1.1.0 includes localization files for all 12 Anno 117 interface languages so the UI does not become blank on non-English installations.
++Version 1.2.0 includes localization files for all 12 Anno 117 interface languages so the UI does not become blank on non-English installations.
+ 
+ - **English:** fully supported
+ - **German:** fully supported, including dynamic report text and Anno-localized specialist names
+-- **Other interface languages:** English fallback text is currently supplied for compatibility
++- **Other interface languages:** English fallback text is supplied for compatibility
+ 
+ Specialist names are resolved from Anno by GUID where supported, allowing the game localization to provide the appropriate displayed name.
+ 
+ ## Installation
+ 
+-Extract the mod folder into your Anno 117 mods folder, for example:
++Extract the ZIP into your Anno 117 mods folder, for example:
+ 
+ `<Documents>/Anno 117 - Pax Romana/mods/`
+ 
+-Keep the folder containing `modinfo.json` intact.
++The extracted top-level folder should remain exactly:
++
++`SpecialistManagement`
+ 
+ ## Compatibility and limitations
+ 
+@@ -72,37 +92,28 @@ Keep the folder containing `modinfo.json` intact.
+ - The parchment report uses the native TextPopup control; inline bold/italic/color formatting is not currently available
+ - After a major game update, new specialists may require regenerating the embedded target mapping from the updated `assets.xml`; unmapped specialists remain enabled for safety
+ 
+-## Version 1.1.0
++## Version 1.2.0
+ 
+ Highlights:
+-- Patch 2.0 Heroic rarity support (internal `Mythic`, displayed as `Heroic`)
+-- Structured metadata for all 30 Patch 2.0 Heroic specialists, including Prestige requirements and separate island-wide effects
++- Native configurable **Specialist Management - Open** control
++- Shared remappable parchment Entry 1–9 and Back controls
++- Exact active-parchment ownership isolation to prevent cross-mod shortcut leakage
++- Globally reachable PC03 bridge for shared Parchment Controls
++- Clean plain-text shortcut labels in TextPopup reports
++- **Potential Duplicate Specialists** report with exact 1–6 page native paging
++- Direct jumps from numbered report entries
++- Patch 2.0 Heroic specialist metadata and 402 ordinary-radius target mappings
++- Province-aware Latium / Albion scans and caches
++- Read-only specialist-management workflow
++
++## Version 1.1.0
++
++Previous release highlights:
++- Patch 2.0 Heroic rarity support
++- Structured metadata for 30 Patch 2.0 Heroic specialists
+ - Patch 2.0 ordinary-radius target mappings for Relevant Specialists
+-- Removed the obsolete separate global rescan shortcut; use New Scan from Specialist Management
+ - English and German Specialist Management UI/report support
+ - German specialist names resolved from Anno localization by GUID
+ - Language-neutral GUID-based warehouse jumps
+-- Reliable Ctrl+Alt+1 ... 9 report navigation
++- Reliable numbered report navigation
+ - Province-aware scans for Latium and Albion
+-- Read-only specialist management and recommendation workflow
+-
+-### Test4 runtime fixes
+-
+-- Fixed Best Opportunities / Unused Specialists report rendering by attaching Heroic metadata to the authoritative SpecialistFinder runtime table.
+-- Added state-gated Ctrl+Alt+0 return from Specialist Management parchments, using deferred close-and-return behavior compatible with the same shortcut used by Ship Finder and Rename Manager.
+-- Ctrl+Alt+I on a supported specialist host no longer opens the management menu just because the slot picker is still closed; it arms/disarms Relevant Specialists for the next picker.
+-
+-
+-## v1.1.0 Test6 parchment behavior
+-- Ctrl+Alt+0 closes every Specialist Management report parchment and returns to the main Specialist Management menu after the parchment is closed.
+-- Reports no longer create hidden Governor/Decision return helpers. This prevents return icons from accumulating.
+-- Ctrl+Alt+1..9 report jumps close the parchment and jump directly to the selected target.
+-- Relevant Specialists uses the proven picker-only behavior: open a specialist slot selection first, then press Ctrl+Alt+I to toggle relevant specialists.
+-
+-
+-### Patch 2 Test7
+-Every Specialist Management report displays `CTRL+ALT+0` at the top as the universal Back to Specialist Management shortcut. In a Governor Villa, Guest House, or Officium, pressing `Ctrl+Alt+I` before opening a specialist slot arms Relevant Specialists; when the slot candidate list appears, the filter applies automatically. Press `Ctrl+Alt+I` again to restore all candidates.
+-
+-
+-## Test8 compatibility note
+-Relevant Specialists / Governor Villa specialist selection behavior is restored to the proven v1.0.8 implementation. Open a specialist slot selection, then press Ctrl+Alt+I to toggle Relevant Specialists. No host-arm or expanded popup-discovery experiment remains.
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/export/assets.xml b/SirLocksley Parchment Controls Core/data/base/config/export/assets.xml
+new file mode 100644
+index 0000000..c6580f4
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/export/assets.xml	
+@@ -0,0 +1,144 @@
++<ModOps>
++  <ModOp GUID="2001271" Add="ShortcutConfig/InputBindings">
++    <Item>
++      <Command>if SirLocksleyPC01 ~= nil and SirLocksleyPC01.Handle ~= nil then SirLocksleyPC01.Handle(SirLocksleyPC01,1) end; if SirLocksleyPC02 ~= nil and SirLocksleyPC02.Handle ~= nil then SirLocksleyPC02.Handle(SirLocksleyPC02,1) end; if SirLocksleyPC03 ~= nil and SirLocksleyPC03.Handle ~= nil then SirLocksleyPC03.Handle(SirLocksleyPC03,1) end; if SirLocksleyPC04 ~= nil and SirLocksleyPC04.Handle ~= nil then SirLocksleyPC04.Handle(SirLocksleyPC04,1) end; if SirLocksleyPC05 ~= nil and SirLocksleyPC05.Handle ~= nil then SirLocksleyPC05.Handle(SirLocksleyPC05,1) end; if SirLocksleyPC06 ~= nil and SirLocksleyPC06.Handle ~= nil then SirLocksleyPC06.Handle(SirLocksleyPC06,1) end; if SirLocksleyPC07 ~= nil and SirLocksleyPC07.Handle ~= nil then SirLocksleyPC07.Handle(SirLocksleyPC07,1) end; if SirLocksleyPC08 ~= nil and SirLocksleyPC08.Handle ~= nil then SirLocksleyPC08.Handle(SirLocksleyPC08,1) end; if SirLocksleyPC09 ~= nil and SirLocksleyPC09.Handle ~= nil then SirLocksleyPC09.Handle(SirLocksleyPC09,1) end; if SirLocksleyPC10 ~= nil and SirLocksleyPC10.Handle ~= nil then SirLocksleyPC10.Handle(SirLocksleyPC10,1) end; if SirLocksleyPC11 ~= nil and SirLocksleyPC11.Handle ~= nil then SirLocksleyPC11.Handle(SirLocksleyPC11,1) end; if SirLocksleyPC12 ~= nil and SirLocksleyPC12.Handle ~= nil then SirLocksleyPC12.Handle(SirLocksleyPC12,1) end</Command>
++      <Text>2088800101</Text>
++      <Active>Session</Active>
++      <Configurable>1</Configurable>
++      <Identifier>SirLocksleyParchmentSele
