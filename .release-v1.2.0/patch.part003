@@ -1,0 +1,655 @@
+      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_french.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_french.xml
+new file mode 100644
+index 0000000..49c29c2
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_french.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Commandes du parchemin - Entrée 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Entrée 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Entrée 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Entrée 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Entrée 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Entrée 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Entrée 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Entrée 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Entrée 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Commandes du parchemin - Retour</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_german.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_german.xml
+new file mode 100644
+index 0000000..929fc2e
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_german.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Eintrag 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Pergamentsteuerung - Zurück</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_italian.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_italian.xml
+new file mode 100644
+index 0000000..3a6532b
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_italian.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Parchment Controls - Entry 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_japanese.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_japanese.xml
+new file mode 100644
+index 0000000..3a6532b
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_japanese.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Parchment Controls - Entry 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_korean.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_korean.xml
+new file mode 100644
+index 0000000..3a6532b
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_korean.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Parchment Controls - Entry 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_polish.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_polish.xml
+new file mode 100644
+index 0000000..3a6532b
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_polish.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Parchment Controls - Entry 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_portuguese.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_portuguese.xml
+new file mode 100644
+index 0000000..3a6532b
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_portuguese.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Parchment Controls - Entry 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_russian.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_russian.xml
+new file mode 100644
+index 0000000..3a6532b
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_russian.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Parchment Controls - Entry 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_spanish.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_spanish.xml
+new file mode 100644
+index 0000000..3a6532b
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_spanish.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Parchment Controls - Entry 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/data/base/config/gui/texts_taiwanese.xml b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_taiwanese.xml
+new file mode 100644
+index 0000000..3a6532b
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/data/base/config/gui/texts_taiwanese.xml	
+@@ -0,0 +1,44 @@
++<ModOps>
++  <ModOp Add="/TextExport/Texts[1]">
++    <Text>
++      <Text>Parchment Controls - Entry 1</Text>
++      <LineId>2088800101</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 2</Text>
++      <LineId>2088800102</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 3</Text>
++      <LineId>2088800103</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 4</Text>
++      <LineId>2088800104</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 5</Text>
++      <LineId>2088800105</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 6</Text>
++      <LineId>2088800106</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 7</Text>
++      <LineId>2088800107</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 8</Text>
++      <LineId>2088800108</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Entry 9</Text>
++      <LineId>2088800109</LineId>
++    </Text>
++    <Text>
++      <Text>Parchment Controls - Back</Text>
++      <LineId>2088800110</LineId>
++    </Text>
++  </ModOp>
++</ModOps>
+diff --git a/SirLocksley Parchment Controls Core/modinfo.json b/SirLocksley Parchment Controls Core/modinfo.json
+new file mode 100644
+index 0000000..f52e655
+--- /dev/null
++++ b/SirLocksley Parchment Controls Core/modinfo.json	
+@@ -0,0 +1,18 @@
++{
++  "ModID": "sirlocksley-parchment-controls-core",
++  "Version": "1.0.1",
++  "Anno": 8,
++  "ModName": "SirLocksley Parchment Controls Core",
++  "Category": {
++    "English": "Utility"
++  },
++  "Description": "Shared native configurable parchment controls for SirLocksley utility mods.",
++  "CreatorName": "Dr. Enrico Handrick / SirLocksley13",
++  "GameSetup": {
++    "RequiresNewGame": false,
++    "SafeToRemove": true,
++    "Multiplayer": false,
++    "Campaign": false
++  },
++  "Difficulty": "unchanged"
++}
+diff --git a/data/base/config/export/assets.xml b/data/base/config/export/assets.xml
+index 63fe161..16913e2 100644
+--- a/data/base/config/export/assets.xml
++++ b/data/base/config/export/assets.xml
+@@ -1,10 +1,14 @@
+ <ModOps>
+-  <ModOp Type="add" GUID="2001271" Path="/Values/ShortcutConfig/InputBindings">
++  <ModOp GUID="2001271" Add="ShortcutConfig/InputBindings">
+     <Item>
+-      <Command>SpecialistFinderRC:Open()</Command>
++      <Command>SpecialistFinderRC.Open(SpecialistFinderRC)</Command>
++      <Text>2008618510</Text>
+       <Active>Session</Active>
+-      <Identifier>SpecialistFinderStatisticsFirstV020</Identifier>
++      <Configurable>1</Configurable>
++      <Identifier>SirLocksleySpecialistManagementOpen</Identifier>
+       <AvailableOnPlatforms>PC</AvailableOnPlatforms>
++      <HideInOptionMenu>0</HideInOptionMenu>
++      <AllowMultipleShortcuts>1</AllowMultipleShortcuts>
+       <InputTypes>
+         <Modern>
+           <KeyType>Control;Alt;I</KeyType>
+@@ -14,146 +18,6 @@
+         </Legacy>
+       </InputTypes>
+     </Item>
+-    <Item>
+-      <Command>SpecialistFinderRC:JumpReport1()</Command>
+-      <Active>Session</Active>
+-      <Identifier>SpecialistManagementJumpReport1V057</Identifier>
+-      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+-      <InputTypes>
+-        <Modern>
+-          <KeyType>Control;Alt;Digit1</KeyType>
+-        </Modern>
+-        <Legacy>
+-          <KeyType>Control;Alt;Digit1</KeyType>
+-        </Legacy>
+-      </InputTypes>
+-    </Item>
+-    <Item>
+-      <Command>SpecialistFinderRC:JumpReport2()</Command>
+-      <Active>Session</Active>
+-      <Identifier>SpecialistManagementJumpReport2V057</Identifier>
+-      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+-      <InputTypes>
+-        <Modern>
+-          <KeyType>Control;Alt;Digit2</KeyType>
+-        </Modern>
+-        <Legacy>
+-          <KeyType>Control;Alt;Digit2</KeyType>
+-        </Legacy>
+-      </InputTypes>
+-    </Item>
+-    <Item>
+-      <Command>SpecialistFinderRC:JumpReport3()</Command>
+-      <Active>Session</Active>
+-      <Identifier>SpecialistManagementJumpReport3V057</Identifier>
+-      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+-      <InputTypes>
+-        <Modern>
+-          <KeyType>Control;Alt;Digit3</KeyType>
+-        </Modern>
+-        <Legacy>
+-          <KeyType>Control;Alt;Digit3</KeyType>
+-        </Legacy>
+-      </InputTypes>
+-    </Item>
+-    <Item>
+-      <Command>SpecialistFinderRC:JumpReport4()</Command>
+-      <Active>Session</Active>
+-      <Identifier>SpecialistManagementJumpReport4V057</Identifier>
+-      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+-      <InputTypes>
+-        <Modern>
+-          <KeyType>Control;Alt;Digit4</KeyType>
+-        </Modern>
+-        <Legacy>
+-          <KeyType>Control;Alt;Digit4</KeyType>
+-        </Legacy>
+-      </InputTypes>
+-    </Item>
+-    <Item>
+-      <Command>SpecialistFinderRC:JumpReport5()</Command>
+-      <Active>Session</Active>
+-      <Identifier>SpecialistManagementJumpReport5V057</Identifier>
+-      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+-      <InputTypes>
+-        <Modern>
+-          <KeyType>Control;Alt;Digit5</KeyType>
+-        </Modern>
+-        <Legacy>
+-          <KeyType>Control;Alt;Digit5</KeyType>
+-        </Legacy>
+-      </InputTypes>
+-    </Item>
+-    <Item>
+-      <Command>SpecialistFinderRC:JumpReport6()</Command>
+-      <Active>Session</Active>
+-      <Identifier>SpecialistManagementJumpReport6V057</Identifier>
+-      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+-      <InputTypes>
+-        <Modern>
+-          <KeyType>Control;Alt;Digit6</KeyType>
+-        </Modern>
+-        <Legacy>
+-          <KeyType>Control;Alt;Digit6</KeyType>
+-        </Legacy>
+-      </InputTypes>
+-    </Item>
+-    <Item>
+-      <Command>SpecialistFinderRC:JumpReport7()</Command>
+-      <Active>Session</Active>
+-      <Identifier>SpecialistManagementJumpReport7V057</Identifier>
+-      <AvailableOnPlatforms>PC</AvailableOnPlatforms>
+-      <InputTypes>
+-        <Modern>
+-          <KeyType>Control;Alt;Digit7</KeyType>
+-      
